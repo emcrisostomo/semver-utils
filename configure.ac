@@ -26,6 +26,7 @@ AC_CONFIG_SRCDIR([src/libsemver/c/libsemver.cpp])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_HEADERS([libsemver_config.h])
 AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([src/libsemver/Makefile])
 AC_CONFIG_MACRO_DIRS([m4])
 AC_CONFIG_MACRO_DIR([m4])
 

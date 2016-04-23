@@ -16,11 +16,10 @@
 ACLOCAL_AMFLAGS = -I m4
 
 # Refresh configuration if libtool dependencies change
-# LIBTOOL_DEPS = @LIBTOOL_DEPS@
-# libtool: $(LIBTOOL_DEPS)
-#	$(SHELL) $(top_builddir)/config.status libtool
+libtool: $(LIBTOOL_DEPS)
+	$(SHELL) $(top_builddir)/config.status libtool
 
-SUBDIRS = src po
+SUBDIRS = src/libsemver po
 
 dist_doc_DATA  = README.md
 dist_doc_DATA += AUTHORS COPYING LICENSE NEWS
