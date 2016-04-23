@@ -19,7 +19,7 @@
 dnl Copyright (C) 2016 Enrico M. Crisostomo
 AC_PREREQ([2.69])
 m4_include([m4/libsemver_version.m4])
-AC_INIT([libsemver], [1.0.0-develop], [enrico.m.crisostomo@gmail.com], [], [https://github.com/emcrisostomo/semver-utils])
+AC_INIT([libsemver], [LIBSEMVER_VERSION], [enrico.m.crisostomo@gmail.com], [], [https://github.com/emcrisostomo/semver-utils])
 AC_COPYRIGHT([2016 (C) Enrico M. Crisostomo])
 AC_REVISION([$Revision: LIBSEMVER_REVISION$])
 AC_CONFIG_SRCDIR([src/libsemver/c/libsemver.cpp])
