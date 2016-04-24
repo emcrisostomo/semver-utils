@@ -90,3 +90,10 @@ xsize.m4
 Doxyfile
 libsemver_config.h
 libsemver_config.h.in
+
+# IntelliJ IDEA
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dataSources.*
+.idea/dictionaries
+out/
