@@ -22,6 +22,8 @@ lib_LTLIBRARIES = libsemver.la
 
 libsemver_la_SOURCES  = c/libsemver.cpp
 libsemver_la_SOURCES += c/libsemver.h
+libsemver_la_SOURCES += c++/version.hpp
+libsemver_la_SOURCES += c++/version.cpp
 libsemver_la_SOURCES += gettext.h
 libsemver_la_SOURCES += gettext_defs.h
 
