@@ -15,7 +15,7 @@
  */
 /**
  * @file
- * @brief Main `libfswatch` source file.
+ * @brief Main `libsemver` source file.
  * @copyright Copyright (c) 2016 Enrico M. Crisostomo
  * @license GNU General Public License v. 3.0
  * @author Enrico M. Crisostomo
