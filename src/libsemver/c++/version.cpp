@@ -24,8 +24,14 @@
 namespace semver
 {
   static std::vector<unsigned int> parse_version(std::string v);
+  static void match_prerelease(const std::string& s);
+  static void match_metadata(const std::string& s);
   static void check_prerelease(const std::string& s);
   static void check_identifier(const std::string& s);
+  static const std::string PRERELEASE_PATTERN(
+    "([0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)");
+  static const std::string METADATA_PATTERN(
+    "([0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)");
 
   version version::from_string(std::string v)
   {
@@ -44,7 +50,7 @@ namespace semver
     //    Identifiers MUST comprise only ASCII alphanumerics and hyphen
     //    [0-9A-Za-z-].  Identifiers MUST NOT be empty.  Numeric identifiers MUST
     //    NOT include leading zeroes.
-    const std::string prerelease_pattern = "(-([0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*))?";
+    const std::string prerelease_pattern = "(-" + PRERELEASE_PATTERN + ")?";
     const int PRERELEASE_INDEX = 6;
 
     // 10. Build metadata MAY be denoted by appending a plus sign and a series of
@@ -52,7 +58,7 @@ namespace semver
     //     pre-release version.  Identifiers MUST comprise only ASCII
     //     alphanumerics and hyphen [0-9A-Za-z-].  Identifiers MUST NOT be
     //     empty.
-    const std::string metadata_pattern = "(\\+([0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*))?";
+    const std::string metadata_pattern = "(\\+" + METADATA_PATTERN + ")?";
     const int METADATA_INDEX = 9;
 
     const std::string grammar =
@@ -88,7 +94,10 @@ namespace semver
     if (versions.size() == 0)
       throw std::invalid_argument("Version must contain at least one number.");
 
+    match_prerelease(prerelease);
     check_prerelease(prerelease);
+
+    match_metadata(metadata);
   }
 
   std::string version::str()
@@ -144,9 +153,9 @@ namespace semver
     std::for_each(
       first,
       last,
-      [](std::string s)
+      [](std::string t)
       {
-        check_identifier(s);
+        check_identifier(t);
       }
     );
   }
@@ -165,5 +174,17 @@ namespace semver
 
     throw std::invalid_argument(
       _("Numerical identifier cannot contain leading zeroes."));
+  }
+
+  void match_prerelease(const std::string& s)
+  {
+    if (!std::regex_match(s, std::regex(PRERELEASE_PATTERN)))
+      throw std::invalid_argument(_("Invalid prerelease: ") + s);
+  }
+
+  void match_metadata(const std::string& s)
+  {
+    if (!std::regex_match(s, std::regex(METADATA_PATTERN)))
+      throw std::invalid_argument(_("Invalid metadata: ") + s);
   }
 }
