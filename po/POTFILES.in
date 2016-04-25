@@ -16,3 +16,5 @@
 # List of source files which contain translatable strings.
 #
 src/libsemver/c/libsemver.cpp
+src/libsemver/c++/version.cpp
+src/semver/semver.cpp
