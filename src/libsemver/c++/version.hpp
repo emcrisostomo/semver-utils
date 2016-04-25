@@ -30,7 +30,9 @@ namespace semver
 
   public:
     static version from_string(std::string v);
+
     version(const std::vector<unsigned int> versions, const std::string prerelease = "", const std::string metadata = "");
+    std::string str();
   };
 }
 
