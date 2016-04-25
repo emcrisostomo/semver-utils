@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libsemver 1.0.0-develop\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2016-04-24 00:49+0200\n"
-"PO-Revision-Date: 2016-04-24 01:33+0200\n"
+"POT-Creation-Date: 2016-04-25 19:27+0200\n"
+"PO-Revision-Date: 2016-04-25 19:28+0200\n"
 "Last-Translator: Enrico Maria Crisostomo <enrico.m.crisostomo@gmail.com>\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -20,3 +20,23 @@ msgstr ""
 #: src/libsemver/c/libsemver.cpp:30
 msgid "gettext text"
 msgstr ""
+
+#: src/libsemver/c++/version.cpp:78
+msgid "Invalid version: "
+msgstr "Versión inválida: "
+
+#: src/libsemver/c++/version.cpp:236
+msgid "Invalid identifier: "
+msgstr "Identificador inválido: "
+
+#: src/libsemver/c++/version.cpp:246
+msgid "Numerical identifier cannot contain leading zeroes."
+msgstr "Identificador numérico no puede contener ceros a la izquierda."
+
+#: src/libsemver/c++/version.cpp:252
+msgid "Invalid prerelease: "
+msgstr "Prerelease inválida: "
+
+#: src/libsemver/c++/version.cpp:258
+msgid "Invalid metadata: "
+msgstr "Metadatos inválidos: "
