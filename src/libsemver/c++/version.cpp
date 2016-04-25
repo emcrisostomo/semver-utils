@@ -91,8 +91,8 @@ namespace semver
     prerelease(std::move(prerelease)),
     metadata(std::move(metadata))
   {
-    if (versions.size() == 0)
-      throw std::invalid_argument("Version must contain at least one number.");
+    if (versions.size() < 2)
+      throw std::invalid_argument("Version must contain at least two numbers.");
 
     match_prerelease(prerelease);
     check_prerelease(prerelease);
@@ -124,7 +124,6 @@ namespace semver
 
     return out;
   }
-
 
   std::vector<unsigned int> parse_version(std::string v)
   {
