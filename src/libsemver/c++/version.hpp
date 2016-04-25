@@ -31,8 +31,17 @@ namespace semver
   public:
     static version from_string(std::string v);
 
-    version(const std::vector<unsigned int> versions, const std::string prerelease = "", const std::string metadata = "");
-    std::string str();
+    version(const std::vector<unsigned int> versions,
+            const std::string prerelease = "",
+            const std::string metadata = "");
+    std::string str() const;
+    std::vector<unsigned int> get_version() const;
+    std::string get_prerelease() const;
+    std::string get_metadata() const;
+    void bump_major();
+    void bump_minor();
+    void bump_patch();
+    void bump(unsigned int index);
   };
 }
 

@@ -94,13 +94,19 @@ namespace semver
     if (versions.size() < 2)
       throw std::invalid_argument("Version must contain at least two numbers.");
 
-    match_prerelease(prerelease);
-    check_prerelease(prerelease);
+    if (prerelease.size() > 0)
+    {
+      match_prerelease(prerelease);
+      check_prerelease(prerelease);
+    }
 
-    match_metadata(metadata);
+    if (metadata.size() > 0)
+    {
+      match_metadata(metadata);
+    }
   }
 
-  std::string version::str()
+  std::string version::str() const
   {
     std::string out = std::to_string(versions[0]);
 
@@ -123,6 +129,50 @@ namespace semver
     }
 
     return out;
+  }
+
+  void version::bump_major()
+  {
+    bump(0);
+  }
+
+  void version::bump_minor()
+  {
+    bump(1);
+  }
+
+  void version::bump_patch()
+  {
+    bump(2);
+  }
+
+  void version::bump(unsigned int index)
+  {
+    if (index >= versions.size())
+    {
+      std::fill_n(std::back_inserter(versions), index - versions.size() + 1, 0);
+      versions[index] = 1;
+      return;
+    }
+
+    versions[index] += 1;
+
+    for (int i = index + 1; i < versions.size(); ++i) versions[i] = 0;
+  }
+
+  std::vector<unsigned int> version::get_version() const
+  {
+    return versions;
+  }
+
+  std::string version::get_prerelease() const
+  {
+    return prerelease;
+  }
+
+  std::string version::get_metadata() const
+  {
+    return metadata;
   }
 
   std::vector<unsigned int> parse_version(std::string v)
