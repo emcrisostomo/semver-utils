@@ -131,33 +131,41 @@ namespace semver
     return out;
   }
 
-  void version::bump_major()
+  version version::bump_major() const
   {
-    bump(0);
+    return bump(0);
   }
 
-  void version::bump_minor()
+  version version::bump_minor() const
   {
-    bump(1);
+    return bump(1);
   }
 
-  void version::bump_patch()
+  version version::bump_patch() const
   {
-    bump(2);
+    return bump(2);
   }
 
-  void version::bump(unsigned int index)
+  version version::bump(unsigned int index) const
   {
-    if (index >= versions.size())
+    std::vector<unsigned int> bumped_versions = versions;
+
+    if (index >= bumped_versions.size())
     {
-      std::fill_n(std::back_inserter(versions), index - versions.size() + 1, 0);
-      versions[index] = 1;
-      return;
+      std::fill_n(std::back_inserter(bumped_versions),
+                  index - bumped_versions.size() + 1,
+                  0);
+      bumped_versions[index] = 1;
+    }
+    else
+    {
+      bumped_versions[index] += 1;
+
+      for (int i = index + 1; i < bumped_versions.size(); ++i)
+        bumped_versions[i] = 0;
     }
 
-    versions[index] += 1;
-
-    for (int i = index + 1; i < versions.size(); ++i) versions[i] = 0;
+    return version(bumped_versions, prerelease, metadata);
   }
 
   std::vector<unsigned int> version::get_version() const
@@ -173,6 +181,16 @@ namespace semver
   std::string version::get_metadata() const
   {
     return metadata;
+  }
+
+  version version::release()
+  {
+    return version(versions, "", metadata);
+  }
+
+  bool version::is_release() const
+  {
+    return (prerelease.size() == 0);
   }
 
   std::vector<unsigned int> parse_version(std::string v)

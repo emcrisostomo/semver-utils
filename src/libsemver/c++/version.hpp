@@ -38,10 +38,12 @@ namespace semver
     std::vector<unsigned int> get_version() const;
     std::string get_prerelease() const;
     std::string get_metadata() const;
-    void bump_major();
-    void bump_minor();
-    void bump_patch();
-    void bump(unsigned int index);
+    version bump_major() const;
+    version bump_minor() const;
+    version bump_patch() const;
+    version bump(unsigned int index) const;
+    version release();
+    bool is_release() const;
   };
 }
 
