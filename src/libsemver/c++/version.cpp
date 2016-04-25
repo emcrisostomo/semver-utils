@@ -21,6 +21,9 @@
 #include "../gettext_defs.h"
 #include "version.hpp"
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+
 namespace semver
 {
   static std::vector<unsigned int> parse_version(std::string v);
@@ -255,3 +258,5 @@ namespace semver
       throw std::invalid_argument(_("Invalid metadata: ") + s);
   }
 }
+
+#pragma clang diagnostic pop
