@@ -183,7 +183,7 @@ namespace semver
     return metadata;
   }
 
-  version version::release()
+  version version::release() const
   {
     return version(versions, "", metadata);
   }

@@ -42,7 +42,7 @@ namespace semver
     version bump_minor() const;
     version bump_patch() const;
     version bump(unsigned int index) const;
-    version release();
+    version release() const;
     bool is_release() const;
   };
 }
