@@ -45,7 +45,7 @@ namespace semver
     //
     // This implementation allows for a version number containing more than 3
     // components.
-    const std::string version_pattern = "((0|[1-9][[:digit:]]*)(\\.(0|[1-9][[:digit:]]*)){2,})";
+    const std::string version_pattern = "((0|[1-9][[:digit:]]*)(\\.(0|[1-9][[:digit:]]*)){1,})";
     const int VERSION_INDEX = 1;
 
     // 9. A pre-release version MAY be denoted by appending a hyphen and a series
