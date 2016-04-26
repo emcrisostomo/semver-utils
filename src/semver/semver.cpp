@@ -11,6 +11,7 @@
 
 static bool command_set = false;
 static bool cflag = false;
+static bool rflag = false;
 static bool sflag = false;
 static bool vflag = false;
 
@@ -87,7 +88,7 @@ int sort_versions(std::vector<std::string> args)
 {
   std::vector<semver::version> versions;
 
-  for (auto v : args)
+  for (auto& v : args)
   {
     try
     {
@@ -100,11 +101,15 @@ int sort_versions(std::vector<std::string> args)
     }
   }
 
-  std::sort(versions.begin(), versions.end());
+  if (rflag)
+    std::sort(versions.begin(), versions.end(),
+              std::greater<semver::version>());
+  else
+    std::sort(versions.begin(), versions.end());
 
-  for (auto v : versions)
+  for (auto& ver : versions)
   {
-    std::cout << v.str() << "\n";
+    std::cout << ver.str() << "\n";
   }
 
   return 0;
@@ -153,12 +158,13 @@ std::vector<std::string> read_arguments(int argc, char **argv)
 void parse_opts(int argc, char **argv)
 {
   int ch;
-  std::string short_options = "chsv";
+  std::string short_options = "chrsv";
 
   int option_index = 0;
   static struct option long_options[] = {
     {"compare", no_argument, nullptr, 'c'},
     {"help",    no_argument, nullptr, 'h'},
+    {"reverse", no_argument, nullptr, 'r'},
     {"sort",    no_argument, nullptr, 's'},
     {"valid",   no_argument, nullptr, 'v'},
     {nullptr, 0,             nullptr, 0}
@@ -180,6 +186,10 @@ void parse_opts(int argc, char **argv)
     case 'h':
       usage(std::cout);
       exit(0);
+
+    case 'r':
+      rflag = true;
+      break;
 
     case 's':
       command_set = true;
