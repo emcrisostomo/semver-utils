@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <getopt.h>
 #include <unistd.h> // isatty()
@@ -10,6 +11,7 @@
 
 static bool command_set = false;
 static bool cflag = false;
+static bool sflag = false;
 static bool vflag = false;
 
 static void parse_opts(int argc, char **argv);
@@ -18,6 +20,7 @@ static void usage(std::ostream& stream);
 
 static int check_versions(std::vector<std::string> vers);
 static int compare_versions(std::vector<std::string> vector);
+static int sort_versions(std::vector<std::string> vector);
 
 int main(int argc, char **argv)
 {
@@ -48,6 +51,7 @@ int main(int argc, char **argv)
 
   if (vflag) return check_versions(args);
   if (cflag) return compare_versions(args);
+  if (sflag) return sort_versions(args);
 
   return 0;
 }
@@ -77,6 +81,33 @@ int compare_versions(std::vector<std::string> vector)
     std::cerr << ex.what() << "\n";
     return 4;
   }
+}
+
+int sort_versions(std::vector<std::string> args)
+{
+  std::vector<semver::version> versions;
+
+  for (auto v : args)
+  {
+    try
+    {
+      versions.push_back(semver::version::from_string(v));
+    }
+    catch (std::invalid_argument& ex)
+    {
+      std::cerr << ex.what() << "\n";
+      return 1;
+    }
+  }
+
+  std::sort(versions.begin(), versions.end());
+
+  for (auto v : versions)
+  {
+    std::cout << v.str() << "\n";
+  }
+
+  return 0;
 }
 
 int check_versions(std::vector<std::string> vers)
@@ -122,12 +153,13 @@ std::vector<std::string> read_arguments(int argc, char **argv)
 void parse_opts(int argc, char **argv)
 {
   int ch;
-  std::string short_options = "chv";
+  std::string short_options = "chsv";
 
   int option_index = 0;
   static struct option long_options[] = {
     {"compare", no_argument, nullptr, 'c'},
     {"help",    no_argument, nullptr, 'h'},
+    {"sort",    no_argument, nullptr, 's'},
     {"valid",   no_argument, nullptr, 'v'},
     {nullptr, 0,             nullptr, 0}
   };
@@ -148,6 +180,11 @@ void parse_opts(int argc, char **argv)
     case 'h':
       usage(std::cout);
       exit(0);
+
+    case 's':
+      command_set = true;
+      sflag = true;
+      break;
 
     case 'v':
       command_set = true;
