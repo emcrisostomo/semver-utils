@@ -204,6 +204,9 @@ void parse_opts(int argc, char **argv)
     case '?':
       usage(std::cerr);
       exit(1);
+    default:
+      usage(std::cerr);
+      exit(2);
     }
   }
 
