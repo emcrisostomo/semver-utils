@@ -184,14 +184,43 @@ namespace semver
     return metadata;
   }
 
-  version version::release() const
+  version version::strip_prerelease() const
   {
     return version(versions, "", metadata);
+  }
+
+  version version::strip_metadata() const
+  {
+    return version(versions, prerelease, "");
   }
 
   bool version::is_release() const
   {
     return (prerelease.size() == 0);
+  }
+
+  bool version::operator==(const version& v) const
+  {
+    return versions == v.versions
+           && prerelease == v.prerelease
+           && metadata == v.metadata;
+  }
+
+  bool version::operator<(const version& v) const
+  {
+    for (auto i = 0; i < std::max(versions.size(), v.versions.size()); ++i)
+    {
+      if (get_version(i) < v.get_version(i)) return true;
+    }
+
+    return false;
+  }
+
+  unsigned int version::get_version(unsigned int index) const
+  {
+    if (index >= versions.size()) return 0;
+
+    return versions[index];
   }
 
   std::vector<unsigned int> parse_version(std::string v)

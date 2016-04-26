@@ -39,14 +39,18 @@ namespace semver
             const std::string metadata = "");
     std::string str() const;
     std::vector<unsigned int> get_version() const;
+    unsigned int get_version(unsigned int index) const;
     std::string get_prerelease() const;
     std::string get_metadata() const;
     version bump_major() const;
     version bump_minor() const;
     version bump_patch() const;
     version bump(unsigned int index) const;
-    version release() const;
+    version strip_prerelease() const;
+    version strip_metadata() const;
     bool is_release() const;
+    bool operator==(const version& v) const;
+    bool operator<(const version& v) const;
   };
 }
 
