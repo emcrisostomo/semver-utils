@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libsemver 1.0.0-develop\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2016-04-25 19:27+0200\n"
-"PO-Revision-Date: 2016-04-25 20:05+0200\n"
+"POT-Creation-Date: 2016-04-26 04:03+0200\n"
+"PO-Revision-Date: 2016-04-26 04:08+0200\n"
 "Last-Translator: Enrico Maria Crisostomo <enrico.m.crisostomo@gmail.com>\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -25,18 +25,58 @@ msgstr ""
 msgid "Invalid version: "
 msgstr "Versión inválida: "
 
-#: src/libsemver/c++/version.cpp:236
+#: src/libsemver/c++/version.cpp:263
 msgid "Invalid identifier: "
 msgstr "Identificador inválido: "
 
-#: src/libsemver/c++/version.cpp:246
+#: src/libsemver/c++/version.cpp:273
 msgid "Numerical identifier cannot contain leading zeroes."
 msgstr "Identificador numérico no puede contener ceros a la izquierda."
 
-#: src/libsemver/c++/version.cpp:252
+#: src/libsemver/c++/version.cpp:279
 msgid "Invalid prerelease: "
 msgstr "Prerelease inválida: "
 
-#: src/libsemver/c++/version.cpp:258
+#: src/libsemver/c++/version.cpp:285
 msgid "Invalid metadata: "
 msgstr "Metadatos inválidos: "
+
+#: src/semver/semver.cpp:35
+msgid "No command has been specified.\n"
+msgstr "Ningún comando has sido especificado.\n"
+
+#: src/semver/semver.cpp:45 src/semver/semver.cpp:59
+msgid "Invalid number of arguments.\n"
+msgstr "Número de argumentos inválido.\n"
+
+#: src/semver/semver.cpp:167
+msgid "Usage:\n"
+msgstr "Uso:\n"
+
+#: src/semver/semver.cpp:168
+msgid " [OPTION] ... path ...\n"
+msgstr ""
+
+#: src/semver/semver.cpp:170
+msgid "Options:\n"
+msgstr "Opciones:\n"
+
+#: src/semver/semver.cpp:171
+msgid "Show this message.\n"
+msgstr "Muestra este mensaje.\n"
+
+#: src/semver/semver.cpp:173
+msgid ""
+"See the man page for more information.\n"
+"\n"
+msgstr ""
+"Consulta a la página man para más informaciones.\n"
+"\n"
+
+#: src/semver/semver.cpp:174
+msgid "Report bugs to <"
+msgstr "Envía bugs a <"
+
+#: src/semver/semver.cpp:175
+msgid "Project home page: <"
+msgstr "Home page del proyecto: <"
