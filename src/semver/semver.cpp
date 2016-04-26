@@ -17,6 +17,7 @@ static std::vector<std::string> read_arguments(int argc, char **argv);
 static void usage(std::ostream& stream);
 
 static int check_versions(std::vector<std::string> vers);
+static int compare_versions(std::vector<std::string> vector);
 
 int main(int argc, char **argv)
 {
@@ -45,12 +46,37 @@ int main(int argc, char **argv)
     exit(1);
   }
 
-  if (vflag)
-  {
-    return check_versions(args);
-  }
+  if (vflag) return check_versions(args);
+  if (cflag) return compare_versions(args);
 
   return 0;
+}
+
+int compare_versions(std::vector<std::string> vector)
+{
+  if (vector.size() != 2)
+  {
+    std::cerr << _("Invalid number of arguments.\n");
+    return 1;
+  }
+
+  try
+  {
+    semver::version first =
+      semver::version::from_string(
+        vector[0]).strip_prerelease().strip_metadata();
+    semver::version second =
+      semver::version::from_string(
+        vector[1]).strip_prerelease().strip_metadata();
+
+    if (first == second) return 0;
+    return first < second ? 1 : 2;
+  }
+  catch (std::invalid_argument& ex)
+  {
+    std::cerr << ex.what() << "\n";
+    return 4;
+  }
 }
 
 int check_versions(std::vector<std::string> vers)
