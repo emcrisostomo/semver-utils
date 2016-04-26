@@ -13,7 +13,7 @@ set(SOURCE_FILES
         src/libsemver/c++/version.cpp
         src/libsemver/c++/version.hpp)
 
-include_directories(src)
+include_directories(. src)
 add_definitions(-DLOCALEDIR)
 
 add_executable(semver_utils ${SOURCE_FILES})
