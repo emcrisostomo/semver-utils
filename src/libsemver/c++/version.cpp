@@ -216,6 +216,11 @@ namespace semver
     return false;
   }
 
+  bool version::operator>(const version& v) const
+  {
+    return !(*this < v);
+  }
+
   unsigned int version::get_version(unsigned int index) const
   {
     if (index >= versions.size()) return 0;

@@ -51,6 +51,7 @@ namespace semver
     bool is_release() const;
     bool operator==(const version& v) const;
     bool operator<(const version& v) const;
+    bool operator>(const version& v) const;
   };
 }
 
