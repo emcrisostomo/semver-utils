@@ -10,15 +10,18 @@
 #include "../../libsemver_config.h"
 
 static bool command_set = false;
+static bool bflag = false;
 static bool cflag = false;
 static bool rflag = false;
 static bool sflag = false;
 static bool vflag = false;
+static std::string component_to_bump;
 
 static void parse_opts(int argc, char **argv);
 static std::vector<std::string> read_arguments(int argc, char **argv);
 static void usage(std::ostream& stream);
 
+static int bump_versions(std::vector<std::string> vers);
 static int check_versions(std::vector<std::string> vers);
 static int compare_versions(std::vector<std::string> vector);
 static int sort_versions(std::vector<std::string> vector);
@@ -50,11 +53,58 @@ int main(int argc, char **argv)
     exit(1);
   }
 
-  if (vflag) return check_versions(args);
+  if (bflag) return bump_versions(args);
   if (cflag) return compare_versions(args);
   if (sflag) return sort_versions(args);
+  if (vflag) return check_versions(args);
 
   return 0;
+}
+
+int bump_versions(std::vector<std::string> args)
+{
+  unsigned int bump = -1;
+
+  if (component_to_bump.compare("M") == 0
+      || component_to_bump.compare("major") == 0)
+  {
+    bump = 0;
+  }
+  else if (component_to_bump.compare("m") == 0
+           || component_to_bump.compare("minor") == 0)
+  {
+    bump = 1;
+  }
+  else if (component_to_bump.compare("p") == 0
+           || component_to_bump.compare("patch") == 0)
+  {
+    bump = 2;
+  }
+  else
+  {
+    try
+    {
+      bump = (unsigned int) std::stoul(component_to_bump);
+    }
+    catch (std::invalid_argument& ex)
+    {
+      std::cerr << _("Invalid version index: ") << component_to_bump << "\n";
+      return 1;
+    }
+  }
+
+  for (auto& v : args)
+  {
+    try
+    {
+      std::cout << semver::version::from_string(v).bump(bump).str() << "\n";
+    }
+    catch (std::invalid_argument& ex)
+    {
+      std::cerr << ex.what() << "\n";
+      return 1;
+    }
+  }
 }
 
 int compare_versions(std::vector<std::string> vector)
@@ -158,16 +208,17 @@ std::vector<std::string> read_arguments(int argc, char **argv)
 void parse_opts(int argc, char **argv)
 {
   int ch;
-  std::string short_options = "chrsv";
+  std::string short_options = "b:chrsv";
 
   int option_index = 0;
   static struct option long_options[] = {
-    {"compare", no_argument, nullptr, 'c'},
-    {"help",    no_argument, nullptr, 'h'},
-    {"reverse", no_argument, nullptr, 'r'},
-    {"sort",    no_argument, nullptr, 's'},
-    {"valid",   no_argument, nullptr, 'v'},
-    {nullptr, 0,             nullptr, 0}
+    {"bump",    required_argument, nullptr, 'b'},
+    {"compare", no_argument,       nullptr, 'c'},
+    {"help",    no_argument,       nullptr, 'h'},
+    {"reverse", no_argument,       nullptr, 'r'},
+    {"sort",    no_argument,       nullptr, 's'},
+    {"valid",   no_argument,       nullptr, 'v'},
+    {nullptr, 0,                   nullptr, 0}
   };
 
   while ((ch = getopt_long(argc,
@@ -178,6 +229,12 @@ void parse_opts(int argc, char **argv)
   {
     switch (ch)
     {
+    case 'b':
+      command_set = true;
+      bflag = true;
+      component_to_bump = std::string(optarg);
+      break;
+
     case 'c':
       command_set = true;
       cflag = true;
@@ -202,8 +259,8 @@ void parse_opts(int argc, char **argv)
       break;
 
     case '?':
-      usage(std::cerr);
       exit(1);
+
     default:
       usage(std::cerr);
       exit(2);
