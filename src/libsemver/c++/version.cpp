@@ -82,8 +82,6 @@ namespace semver
     std::string prerelease = fragments[PRERELEASE_INDEX].str();
     std::string metadata = fragments[METADATA_INDEX].str();
 
-    check_prerelease(prerelease);
-
     return semver::version(version, prerelease, metadata);
   }
 
