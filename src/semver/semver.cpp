@@ -206,6 +206,12 @@ void parse_opts(int argc, char **argv)
       exit(1);
     }
   }
+
+  if (rflag && !sflag)
+  {
+    std::cerr << _("-r can only be used with -s.\n");
+    exit(1);
+  }
 }
 
 void usage(std::ostream& stream)
