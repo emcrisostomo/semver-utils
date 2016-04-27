@@ -93,6 +93,8 @@ int bump_versions(std::vector<std::string> args)
     }
   }
 
+  int ret = 0;
+
   for (auto& v : args)
   {
     try
@@ -102,9 +104,11 @@ int bump_versions(std::vector<std::string> args)
     catch (std::invalid_argument& ex)
     {
       std::cerr << ex.what() << "\n";
-      return 1;
+      ret = 1;
     }
   }
+
+  return ret;
 }
 
 int compare_versions(std::vector<std::string> vector)
@@ -136,6 +140,7 @@ int compare_versions(std::vector<std::string> vector)
 
 int sort_versions(std::vector<std::string> args)
 {
+  unsigned int ret = 0;
   std::vector<semver::version> versions;
 
   for (auto& v : args)
@@ -147,12 +152,13 @@ int sort_versions(std::vector<std::string> args)
     catch (std::invalid_argument& ex)
     {
       std::cerr << ex.what() << "\n";
-      return 1;
+      ret = 1;
     }
   }
 
   if (rflag)
-    std::sort(versions.begin(), versions.end(),
+    std::sort(versions.begin(),
+              versions.end(),
               std::greater<semver::version>());
   else
     std::sort(versions.begin(), versions.end());
@@ -162,7 +168,7 @@ int sort_versions(std::vector<std::string> args)
     std::cout << ver.str() << "\n";
   }
 
-  return 0;
+  return ret;
 }
 
 int check_versions(std::vector<std::string> vers)
