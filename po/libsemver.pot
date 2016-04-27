@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libsemver 1.0.0-develop\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2016-04-26 04:03+0200\n"
+"POT-Creation-Date: 2016-04-27 03:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,56 +25,64 @@ msgstr ""
 msgid "Invalid version: "
 msgstr ""
 
-#: src/libsemver/c++/version.cpp:263
+#: src/libsemver/c++/version.cpp:272
 msgid "Invalid identifier: "
 msgstr ""
 
-#: src/libsemver/c++/version.cpp:273
+#: src/libsemver/c++/version.cpp:282
 msgid "Numerical identifier cannot contain leading zeroes."
 msgstr ""
 
-#: src/libsemver/c++/version.cpp:279
+#: src/libsemver/c++/version.cpp:288
 msgid "Invalid prerelease: "
 msgstr ""
 
-#: src/libsemver/c++/version.cpp:285
+#: src/libsemver/c++/version.cpp:294
 msgid "Invalid metadata: "
 msgstr ""
 
-#: src/semver/semver.cpp:35
+#: src/semver/semver.cpp:42
 msgid "No command has been specified.\n"
 msgstr ""
 
-#: src/semver/semver.cpp:45 src/semver/semver.cpp:59
+#: src/semver/semver.cpp:52 src/semver/semver.cpp:118
 msgid "Invalid number of arguments.\n"
 msgstr ""
 
-#: src/semver/semver.cpp:167
+#: src/semver/semver.cpp:91
+msgid "Invalid version index: "
+msgstr ""
+
+#: src/semver/semver.cpp:278
+msgid "-r can only be used with -s.\n"
+msgstr ""
+
+#: src/semver/semver.cpp:286
 msgid "Usage:\n"
 msgstr ""
 
-#: src/semver/semver.cpp:168
+#: src/semver/semver.cpp:287
 msgid " [OPTION] ... path ...\n"
 msgstr ""
 
-#: src/semver/semver.cpp:170
+#: src/semver/semver.cpp:289
 msgid "Options:\n"
 msgstr ""
 
-#: src/semver/semver.cpp:171
+#: src/semver/semver.cpp:290
 msgid "Show this message.\n"
 msgstr ""
 
-#: src/semver/semver.cpp:173
+#: src/semver/semver.cpp:292
 msgid ""
 "See the man page for more information.\n"
 "\n"
 msgstr ""
 
-#: src/semver/semver.cpp:174
+#: src/semver/semver.cpp:293
 msgid "Report bugs to <"
 msgstr ""
 
-#: src/semver/semver.cpp:175
+#: src/semver/semver.cpp:294
 msgid "Project home page: <"
 msgstr ""
