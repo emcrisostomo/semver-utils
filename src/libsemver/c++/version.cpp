@@ -208,7 +208,7 @@ namespace semver
 
   bool version::operator<(const version& v) const
   {
-    for (auto i = 0; i < std::max(versions.size(), v.versions.size()); ++i)
+    for (unsigned int i = 0; i < std::max(versions.size(), v.versions.size()); ++i)
     {
       unsigned int lh = get_version(i);
       unsigned int rh = v.get_version(i);
