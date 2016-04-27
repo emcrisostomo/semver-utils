@@ -63,7 +63,7 @@ int main(int argc, char **argv)
 
 int bump_versions(std::vector<std::string> args)
 {
-  unsigned int bump = -1;
+  unsigned int bump;
 
   if (component_to_bump.compare("M") == 0
       || component_to_bump.compare("major") == 0)
