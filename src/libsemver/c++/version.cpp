@@ -210,7 +210,11 @@ namespace semver
   {
     for (auto i = 0; i < std::max(versions.size(), v.versions.size()); ++i)
     {
-      if (get_version(i) < v.get_version(i)) return true;
+      unsigned int lh = get_version(i);
+      unsigned int rh = v.get_version(i);
+
+      if (lh < rh) return true;
+      else if (lh > rh) return false;
     }
 
     return false;
@@ -218,7 +222,7 @@ namespace semver
 
   bool version::operator>(const version& v) const
   {
-    return !(*this < v);
+    return (v < *this);
   }
 
   unsigned int version::get_version(unsigned int index) const
