@@ -13,7 +13,13 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+/**
+ * @mainpage
+ *
+ * @section introduction Introduction
+ *
+ * `libsemver` is a library that
+ */
 #include <algorithm>
 #include <iterator> // back_inserter
 #include <regex>
@@ -26,7 +32,7 @@
 
 namespace semver
 {
-  static std::vector<unsigned int> parse_version(std::string v);
+  static std::vector<unsigned int> parse_version(const std::string& v);
   static void match_prerelease(const std::string& s);
   static void match_metadata(const std::string& s);
   static void check_prerelease(const std::string& s);
@@ -232,7 +238,7 @@ namespace semver
     return versions[index];
   }
 
-  std::vector<unsigned int> parse_version(std::string v)
+  std::vector<unsigned int> parse_version(const std::string& v)
   {
     std::regex numbers("\\d+");
     std::sregex_token_iterator first(v.begin(), v.end(), numbers);
