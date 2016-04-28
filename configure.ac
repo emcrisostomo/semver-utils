@@ -67,7 +67,7 @@ AC_CHECK_HEADERS([getopt.h])
 AS_VAR_IF([ac_cv_header_getopt_h], ["yes"], [AC_CHECK_FUNCS([getopt_long])])
 AS_VAR_IF([ac_cv_func_getopt_long], ["yes"], [], [AC_MSG_ERROR([Cannot found getopt_long.])])
 
-AC_CHECK_HEADERS([unistd.h], [], [AC_MSG_ERROR([Cannot find required header.])])
+AC_CHECK_HEADERS([unistd.h stdbool.h], [], [AC_MSG_ERROR([Cannot find a required header.])])
 
 # Checks for typedefs, structures, and compiler characteristics.
 
