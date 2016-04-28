@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/libsemver/gettext_defs.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/libsemver/c/libsemver.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/libsemver/c/libsemver.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/libsemver/c/errors.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/libsemver/gettext.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libsemver_config.h" isTestSource="false" />

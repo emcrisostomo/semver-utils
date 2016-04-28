@@ -43,6 +43,8 @@ typedef struct semver_t
   void *ptr;
 } semver_t;
 
+int semver_last_error();
+
 semver_t *semver_from_string(char *v);
 semver_t *semver_create(const unsigned int *v,
                         const unsigned long v_num,
