@@ -58,18 +58,18 @@ void semver_reset_last_error()
   last_error = SEMVER_EXIT_OK;
 }
 
-semver_t *semver_from_string(char *v)
+semver_t *semver_from_string(char *str)
 {
   semver_reset_last_error();
 
   try
   {
     std::unique_ptr<semver::version> version(
-      new semver::version(semver::version::from_string(v)));
-    semver_t *s = new semver_t();
-    s->ptr = version.release();
+      new semver::version(semver::version::from_string(str)));
+    semver_t *sv = new semver_t();
+    sv->ptr = version.release();
 
-    return s;
+    return sv;
   }
   catch (std::invalid_argument& ex)
   {
@@ -83,8 +83,8 @@ semver_t *semver_from_string(char *v)
   }
 }
 
-semver_t *semver_create(const unsigned int *v,
-                        const unsigned long v_num,
+semver_t *semver_create(const unsigned int *c_vers,
+                        const unsigned long c_vers_num,
                         const char *prerelease,
                         const char *metadata)
 {
@@ -92,14 +92,15 @@ semver_t *semver_create(const unsigned int *v,
 
   try
   {
-    std::unique_ptr<semver::version> p(
-      new semver::version(std::vector<unsigned int>(v, v + v_num),
-                          prerelease ? prerelease : "",
-                          metadata ? metadata : ""));
-    semver_t *s = new semver_t();
-    s->ptr = p.release();
+    std::unique_ptr<semver::version> version(
+      new semver::version(
+        std::vector<unsigned int>(c_vers, c_vers + c_vers_num),
+        prerelease ? prerelease : "",
+        metadata ? metadata : ""));
+    semver_t *sv = new semver_t();
+    sv->ptr = version.release();
 
-    return s;
+    return sv;
   }
   catch (std::bad_alloc& ex)
   {
@@ -121,17 +122,17 @@ char *semver_str(semver_t *ver)
 
   try
   {
-    semver::version *p = static_cast<semver::version *>(ver->ptr);
-    std::string s = p->str();
+    semver::version *version = static_cast<semver::version *>(ver->ptr);
+    std::string str = version->str();
 
-    char *ptr_s = (char *) malloc(sizeof(char) * (s.size() + 1));
+    char *c_str = (char *) malloc(sizeof(char) * (str.size() + 1));
 
-    if (!ptr_s) throw std::bad_alloc();
+    if (!c_str) throw std::bad_alloc();
 
-    std::copy(s.begin(), s.end(), ptr_s);
-    ptr_s[s.size()] = '\0';
+    std::copy(str.begin(), str.end(), c_str);
+    c_str[str.size()] = '\0';
 
-    return ptr_s;
+    return c_str;
   }
   catch (std::bad_alloc& ex)
   {
@@ -146,17 +147,17 @@ unsigned int *semver_get_versions(semver_t *ver)
 
   try
   {
-    semver::version *p = static_cast<semver::version *>(ver->ptr);
-    std::vector<unsigned int> versions = p->get_version();
+    semver::version *version = static_cast<semver::version *>(ver->ptr);
+    std::vector<unsigned int> versions = version->get_version();
 
-    unsigned int *v =
+    unsigned int *c_vers =
       (unsigned int *) malloc(sizeof(unsigned int) * versions.size());
 
-    if (!v) throw std::bad_alloc();
+    if (!c_vers) throw std::bad_alloc();
 
-    std::copy(versions.begin(), versions.end(), v);
+    std::copy(versions.begin(), versions.end(), c_vers);
 
-    return v;
+    return c_vers;
   }
   catch (std::bad_alloc& ex)
   {
@@ -171,9 +172,9 @@ unsigned int semver_get_version(semver_t *ver, unsigned int index)
 
   try
   {
-    semver::version *p = static_cast<semver::version *>(ver->ptr);
+    semver::version *version = static_cast<semver::version *>(ver->ptr);
 
-    return p->get_version(index);
+    return version->get_version(index);
   }
   catch (std::bad_alloc& ex)
   {
@@ -188,25 +189,23 @@ char *semver_get_prerelease(semver_t *ver)
 
   try
   {
-    semver::version *p = static_cast<semver::version *>(ver->ptr);
+    semver::version *version = static_cast<semver::version *>(ver->ptr);
+    std::string prerelease = version->get_prerelease();
 
-    std::string prerelease = p->get_prerelease();
+    char *c_str = (char *) malloc(sizeof(char) * (prerelease.size() + 1));
 
-    char *ptr_s = (char *) malloc(sizeof(char) * (prerelease.size() + 1));
+    if (!c_str) return nullptr;
 
-    if (!ptr_s) return nullptr;
+    std::copy(prerelease.begin(), prerelease.end(), c_str);
+    c_str[prerelease.size()] = '\0';
 
-    std::copy(prerelease.begin(), prerelease.end(), ptr_s);
-    ptr_s[prerelease.size()] = '\0';
-
-    return ptr_s;
+    return c_str;
   }
   catch (std::bad_alloc& ex)
   {
     semver_set_last_error(SEMVER_EXIT_BAD_ALLOC);
     return nullptr;
   }
-
 }
 
 char *semver_get_metadata(semver_t *ver)
@@ -215,9 +214,9 @@ char *semver_get_metadata(semver_t *ver)
 
   try
   {
-    semver::version *p = static_cast<semver::version *>(ver->ptr);
+    semver::version *version = static_cast<semver::version *>(ver->ptr);
 
-    std::string metadata = p->get_metadata();
+    std::string metadata = version->get_metadata();
 
     char *ptr_s = (char *) malloc(sizeof(char) * (metadata.size() + 1));
 
@@ -241,13 +240,14 @@ semver_t *semver_bump_major(semver_t *ver)
 
   try
   {
-    semver::version *p = static_cast<semver::version *>(ver->ptr);
+    semver::version *version = static_cast<semver::version *>(ver->ptr);
+    std::unique_ptr<semver::version> bumped_version(
+      new semver::version(version->bump_major()));
 
-    std::unique_ptr<semver::version> n(new semver::version(p->bump_major()));
-    semver_t *s = new semver_t();
-    s->ptr = n.release();
+    semver_t *sv = new semver_t();
+    sv->ptr = bumped_version.release();
 
-    return s;
+    return sv;
   }
   catch (std::bad_alloc& ex)
   {
@@ -262,13 +262,14 @@ semver_t *semver_bump_minor(semver_t *ver)
 
   try
   {
-    semver::version *p = static_cast<semver::version *>(ver->ptr);
+    semver::version *version = static_cast<semver::version *>(ver->ptr);
+    std::unique_ptr<semver::version> bumped_version(
+      new semver::version(version->bump_minor()));
 
-    std::unique_ptr<semver::version> n(new semver::version(p->bump_minor()));
-    semver_t *s = new semver_t();
-    s->ptr = n.release();
+    semver_t *sv = new semver_t();
+    sv->ptr = bumped_version.release();
 
-    return s;
+    return sv;
   }
   catch (std::bad_alloc& ex)
   {
@@ -283,13 +284,14 @@ semver_t *semver_bump_patch(semver_t *ver)
 
   try
   {
-    semver::version *p = static_cast<semver::version *>(ver->ptr);
+    semver::version *version = static_cast<semver::version *>(ver->ptr);
+    std::unique_ptr<semver::version> bumped_version(
+      new semver::version(version->bump_patch()));
 
-    std::unique_ptr<semver::version> n(new semver::version(p->bump_patch()));
-    semver_t *s = new semver_t();
-    s->ptr = n.release();
+    semver_t *sv = new semver_t();
+    sv->ptr = bumped_version.release();
 
-    return s;
+    return sv;
   }
   catch (std::bad_alloc& ex)
   {
@@ -304,13 +306,14 @@ semver_t *semver_bump(semver_t *ver, unsigned int index)
 
   try
   {
-    semver::version *p = static_cast<semver::version *>(ver->ptr);
+    semver::version *version = static_cast<semver::version *>(ver->ptr);
+    std::unique_ptr<semver::version> bumped_version(
+      new semver::version(version->bump(index)));
 
-    std::unique_ptr<semver::version> n(new semver::version(p->bump(index)));
-    semver_t *s = new semver_t();
-    s->ptr = n.release();
+    semver_t *sv = new semver_t();
+    sv->ptr = bumped_version.release();
 
-    return s;
+    return sv;
   }
   catch (std::bad_alloc& ex)
   {
@@ -325,14 +328,14 @@ semver_t *semver_strip_prerelease(semver_t *ver)
 
   try
   {
-    semver::version *p = static_cast<semver::version *>(ver->ptr);
+    semver::version *version = static_cast<semver::version *>(ver->ptr);
+    std::unique_ptr<semver::version> bumped_version(
+      new semver::version(version->strip_prerelease()));
 
-    std::unique_ptr<semver::version> n(
-      new semver::version(p->strip_prerelease()));
-    semver_t *s = new semver_t();
-    s->ptr = n.release();
+    semver_t *sv = new semver_t();
+    sv->ptr = bumped_version.release();
 
-    return s;
+    return sv;
   }
   catch (std::bad_alloc& ex)
   {
@@ -347,14 +350,14 @@ semver_t *semver_strip_metadata(semver_t *ver)
 
   try
   {
-    semver::version *p = static_cast<semver::version *>(ver->ptr);
+    semver::version *version = static_cast<semver::version *>(ver->ptr);
+    std::unique_ptr<semver::version> bumped_version(
+      new semver::version(version->strip_metadata()));
 
-    std::unique_ptr<semver::version> n(
-      new semver::version(p->strip_metadata()));
-    semver_t *s = new semver_t();
-    s->ptr = n.release();
+    semver_t *sv = new semver_t();
+    sv->ptr = bumped_version.release();
 
-    return s;
+    return sv;
   }
   catch (std::bad_alloc& ex)
   {
@@ -367,9 +370,9 @@ bool semver_is_release(semver_t *ver)
 {
   semver_reset_last_error();
 
-  semver::version *p = static_cast<semver::version *>(ver->ptr);
+  semver::version *version = static_cast<semver::version *>(ver->ptr);
 
-  return p->is_release();
+  return version->is_release();
 }
 
 bool semver_equals(semver_t *lh, semver_t *rh)

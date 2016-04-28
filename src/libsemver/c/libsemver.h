@@ -45,9 +45,9 @@ typedef struct semver_t
 
 int semver_last_error();
 
-semver_t *semver_from_string(char *v);
-semver_t *semver_create(const unsigned int *v,
-                        const unsigned long v_num,
+semver_t *semver_from_string(char *str);
+semver_t *semver_create(const unsigned int *c_vers,
+                        const unsigned long c_vers_num,
                         const char *prerelease,
                         const char *metadata);
 void semver_free(semver_t *ver);
