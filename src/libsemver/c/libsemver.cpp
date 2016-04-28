@@ -58,7 +58,7 @@ void semver_reset_last_error()
   last_error = SEMVER_EXIT_OK;
 }
 
-semver_t *semver_from_string(char *str)
+semver_t *semver_from_string(const char *str)
 {
   semver_reset_last_error();
 
@@ -116,7 +116,7 @@ void semver_free(semver_t *ver)
   delete ver;
 }
 
-char *semver_str(semver_t *ver)
+const char *semver_str(semver_t *ver)
 {
   semver_reset_last_error();
 
@@ -183,7 +183,7 @@ unsigned int semver_get_version(semver_t *ver, unsigned int index)
   }
 }
 
-char *semver_get_prerelease(semver_t *ver)
+const char *semver_get_prerelease(semver_t *ver)
 {
   semver_reset_last_error();
 
@@ -208,7 +208,7 @@ char *semver_get_prerelease(semver_t *ver)
   }
 }
 
-char *semver_get_metadata(semver_t *ver)
+const char *semver_get_metadata(semver_t *ver)
 {
   semver_reset_last_error();
 

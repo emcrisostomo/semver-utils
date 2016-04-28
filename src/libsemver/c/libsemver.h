@@ -45,18 +45,18 @@ typedef struct semver_t
 
 int semver_last_error();
 
-semver_t *semver_from_string(char *str);
+semver_t *semver_from_string(const char *str);
 semver_t *semver_create(const unsigned int *c_vers,
                         const unsigned long c_vers_num,
                         const char *prerelease,
                         const char *metadata);
 void semver_free(semver_t *ver);
 
-char *semver_str(semver_t *ver);
+const char *semver_str(semver_t *ver);
 unsigned int *semver_get_versions(semver_t *ver);
 unsigned int semver_get_version(semver_t *ver, unsigned int index);
-char *semver_get_prerelease(semver_t *ver);
-char *semver_get_metadata(semver_t *ver);
+const char *semver_get_prerelease(semver_t *ver);
+const char *semver_get_metadata(semver_t *ver);
 semver_t *semver_bump_major(semver_t *ver);
 semver_t *semver_bump_minor(semver_t *ver);
 semver_t *semver_bump_patch(semver_t *ver);
