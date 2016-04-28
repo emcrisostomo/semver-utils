@@ -20,7 +20,8 @@ AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\"
 
 lib_LTLIBRARIES = libsemver.la
 
-libsemver_la_SOURCES  = c/libsemver.cpp
+libsemver_la_SOURCES  = c/errors.h
+libsemver_la_SOURCES += c/libsemver.cpp
 libsemver_la_SOURCES += c/libsemver.h
 libsemver_la_SOURCES += c++/version.hpp
 libsemver_la_SOURCES += c++/version.cpp

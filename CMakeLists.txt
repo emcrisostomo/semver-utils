@@ -4,6 +4,7 @@ project(semver_utils)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES
+        src/libsemver/c/errors.h
         src/libsemver/c/libsemver.cpp
         src/libsemver/c/libsemver.h
         src/libsemver/gettext.h
