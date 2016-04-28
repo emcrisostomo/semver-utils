@@ -28,6 +28,9 @@
 #include <exception>
 #include <cstdlib>
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+
 semver_t *semver_to_semver_t(const semver::version& version);
 semver::version semver_t_to_server(const semver_t *const v);
 
@@ -239,3 +242,5 @@ bool semver_is_greater(semver_t *lh, semver_t *rh)
 
   return *lhs > *rhs;
 }
+
+#pragma clang diagnostic pop

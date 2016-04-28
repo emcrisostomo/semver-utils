@@ -30,6 +30,9 @@
 
 #include <stdbool.h>
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+
 #  ifdef __cplusplus
 extern "C"
 {
@@ -68,3 +71,5 @@ bool semver_is_greater(semver_t *lh, semver_t *rh);
 #  endif
 
 #endif /* LIBSEMVER_H */
+
+#pragma clang diagnostic pop
