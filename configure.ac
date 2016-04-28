@@ -70,6 +70,13 @@ AS_VAR_IF([ac_cv_func_getopt_long], ["yes"], [], [AC_MSG_ERROR([Cannot found get
 AC_CHECK_HEADERS([unistd.h stdbool.h], [], [AC_MSG_ERROR([Cannot find a required header.])])
 
 # Checks for typedefs, structures, and compiler characteristics.
+AX_CXX_HAVE_THREAD_LOCAL
+
+AS_VAR_IF(
+  [ax_cv_cxx_have_thread_local],
+  ["yes"],
+  [],
+  [AC_MSG_WARN([thread_local storage specified not supported: the C API of AC_PACKAGE_NAME is not thread-safe.])])
 
 # Checks for library functions.
 
