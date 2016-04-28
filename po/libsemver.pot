@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libsemver 1.0.0-develop\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2016-04-27 03:17+0200\n"
+"POT-Creation-Date: 2016-04-28 19:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,10 +16,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: src/libsemver/c/libsemver.cpp:30
-msgid "gettext text"
-msgstr ""
 
 #: src/libsemver/c++/version.cpp:78
 msgid "Invalid version: "
@@ -45,44 +41,48 @@ msgstr ""
 msgid "No command has been specified.\n"
 msgstr ""
 
-#: src/semver/semver.cpp:52 src/semver/semver.cpp:118
+#: src/semver/semver.cpp:52 src/semver/semver.cpp:122
 msgid "Invalid number of arguments.\n"
 msgstr ""
 
-#: src/semver/semver.cpp:91
+#: src/semver/semver.cpp:61
+msgid "No operation was requested. This is a bug.\n"
+msgstr ""
+
+#: src/semver/semver.cpp:93
 msgid "Invalid version index: "
 msgstr ""
 
-#: src/semver/semver.cpp:278
+#: src/semver/semver.cpp:282
 msgid "-r can only be used with -s.\n"
 msgstr ""
 
-#: src/semver/semver.cpp:286
+#: src/semver/semver.cpp:290
 msgid "Usage:\n"
 msgstr ""
 
-#: src/semver/semver.cpp:287
+#: src/semver/semver.cpp:291
 msgid " [OPTION] ... path ...\n"
 msgstr ""
 
-#: src/semver/semver.cpp:289
+#: src/semver/semver.cpp:293
 msgid "Options:\n"
 msgstr ""
 
-#: src/semver/semver.cpp:290
+#: src/semver/semver.cpp:294
 msgid "Show this message.\n"
 msgstr ""
 
-#: src/semver/semver.cpp:292
+#: src/semver/semver.cpp:296
 msgid ""
 "See the man page for more information.\n"
 "\n"
 msgstr ""
 
-#: src/semver/semver.cpp:293
+#: src/semver/semver.cpp:297
 msgid "Report bugs to <"
 msgstr ""
 
-#: src/semver/semver.cpp:294
+#: src/semver/semver.cpp:298
 msgid "Project home page: <"
 msgstr ""

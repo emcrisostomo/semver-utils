@@ -58,7 +58,7 @@ int main(int argc, char **argv)
   if (sflag) return sort_versions(args);
   if (vflag) return check_versions(args);
 
-  std::cerr << _("No operation was requested. This is a bug.");
+  std::cerr << _("No operation was requested. This is a bug.\n");
 
   return 1;
 }

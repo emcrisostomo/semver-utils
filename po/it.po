@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libsemver 1.0.0-develop\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2016-04-27 03:17+0200\n"
-"PO-Revision-Date: 2016-04-27 03:18+0200\n"
+"POT-Creation-Date: 2016-04-28 19:18+0200\n"
+"PO-Revision-Date: 2016-04-28 19:19+0200\n"
 "Last-Translator: Enrico Maria Crisostomo <enrico.m.crisostomo@gmail.com>\n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -16,10 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: src/libsemver/c/libsemver.cpp:30
-msgid "gettext text"
-msgstr ""
 
 #: src/libsemver/c++/version.cpp:78
 msgid "Invalid version: "
@@ -45,35 +41,39 @@ msgstr "Metadati invalidi: "
 msgid "No command has been specified.\n"
 msgstr "Nessun comando è stato specificato.\n"
 
-#: src/semver/semver.cpp:52 src/semver/semver.cpp:118
+#: src/semver/semver.cpp:52 src/semver/semver.cpp:122
 msgid "Invalid number of arguments.\n"
 msgstr "Numero di parametri invalido.\n"
 
-#: src/semver/semver.cpp:91
+#: src/semver/semver.cpp:61
+msgid "No operation was requested. This is a bug.\n"
+msgstr "Nessuna operazione è stata richiesta. Questo è un bug.\n"
+
+#: src/semver/semver.cpp:93
 msgid "Invalid version index: "
 msgstr "Indice della versione invalido: "
 
-#: src/semver/semver.cpp:278
+#: src/semver/semver.cpp:282
 msgid "-r can only be used with -s.\n"
 msgstr "-r può essere usata solo con -s.\n"
 
-#: src/semver/semver.cpp:286
+#: src/semver/semver.cpp:290
 msgid "Usage:\n"
 msgstr "Uso:\n"
 
-#: src/semver/semver.cpp:287
+#: src/semver/semver.cpp:291
 msgid " [OPTION] ... path ...\n"
 msgstr ""
 
-#: src/semver/semver.cpp:289
+#: src/semver/semver.cpp:293
 msgid "Options:\n"
 msgstr "Opzioni:\n"
 
-#: src/semver/semver.cpp:290
+#: src/semver/semver.cpp:294
 msgid "Show this message.\n"
 msgstr "Mostra questo messaggio.\n"
 
-#: src/semver/semver.cpp:292
+#: src/semver/semver.cpp:296
 msgid ""
 "See the man page for more information.\n"
 "\n"
@@ -81,10 +81,10 @@ msgstr ""
 "Consulta la pagina man per ulteriori informazioni.\n"
 "\n"
 
-#: src/semver/semver.cpp:293
+#: src/semver/semver.cpp:297
 msgid "Report bugs to <"
 msgstr "Invia i bug a <"
 
-#: src/semver/semver.cpp:294
+#: src/semver/semver.cpp:298
 msgid "Project home page: <"
 msgstr "Home page del progetto: <"
