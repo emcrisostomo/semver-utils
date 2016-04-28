@@ -22,7 +22,7 @@ libtool: $(LIBTOOL_DEPS)
 SUBDIRS = src/libsemver src/semver po
 
 dist_doc_DATA  = README.md
-dist_doc_DATA += AUTHORS COPYING LICENSE NEWS
+dist_doc_DATA += AUTHORS CONTRIBUTING.md COPYING LICENSE NEWS
 
 dist-hook:
 # The recipe cannot assume a file in $(distdir) is writable.
