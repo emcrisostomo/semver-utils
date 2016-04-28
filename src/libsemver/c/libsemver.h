@@ -28,13 +28,41 @@
 #ifndef LIBSEMVER_H
 #define LIBSEMVER_H
 
+#include <stdbool.h>
+
 #  ifdef __cplusplus
 extern "C"
 {
 #  endif
 
-  void placeholder();
-  
+typedef struct semver_t
+{
+  void *ptr;
+} semver_t;
+
+semver_t *semver_from_string(char *v);
+semver_t *semver_create(const unsigned int *v,
+                        const unsigned long v_num,
+                        const char *prerelease,
+                        const char *metadata);
+void semver_free(semver_t *ver);
+
+char *semver_str(semver_t *ver);
+unsigned int *semver_get_versions(semver_t *ver);
+unsigned int semver_get_version(semver_t *ver, unsigned int index);
+char *semver_get_prerelease(semver_t *ver);
+char *semver_get_metadata(semver_t *ver);
+semver_t *semver_bump_major(semver_t *ver);
+semver_t *semver_bump_minor(semver_t *ver);
+semver_t *semver_bump_patch(semver_t *ver);
+semver_t *semver_bump(semver_t *ver, unsigned int index);
+semver_t *semver_strip_prerelease(semver_t *ver);
+semver_t *semver_strip_metadata(semver_t *ver);
+bool semver_is_release(semver_t *ver);
+bool semver_equals(semver_t *lh, semver_t *rh);
+bool semver_is_less(semver_t *lh, semver_t *rh);
+bool semver_is_greater(semver_t *lh, semver_t *rh);
+
 #  ifdef __cplusplus
 }
 #  endif
