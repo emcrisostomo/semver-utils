@@ -23,8 +23,8 @@
  */
 
 #include "libsemver.h"
-#include <libsemver/gettext_defs.h>
-#include <libsemver/c++/version.hpp>
+#include "../gettext_defs.h"
+#include "../c++/version.hpp"
 #include <exception>
 #include <cstdlib>
 

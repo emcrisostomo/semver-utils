@@ -13,14 +13,14 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
-
 #ifndef SEMVER_UTILS_VERSION_H
 #define SEMVER_UTILS_VERSION_H
 
 #include <vector>
 #include <string>
+
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 
 namespace semver
 {
