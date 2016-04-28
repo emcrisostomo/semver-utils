@@ -58,7 +58,9 @@ int main(int argc, char **argv)
   if (sflag) return sort_versions(args);
   if (vflag) return check_versions(args);
 
-  return 0;
+  std::cerr << _("No operation was requested. This is a bug.");
+
+  return 1;
 }
 
 int bump_versions(std::vector<std::string> args)
