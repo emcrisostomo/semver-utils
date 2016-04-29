@@ -19,7 +19,7 @@ ACLOCAL_AMFLAGS = -I m4
 libtool: $(LIBTOOL_DEPS)
 	$(SHELL) $(top_builddir)/config.status libtool
 
-SUBDIRS = src/libsemver src/semver po
+SUBDIRS = src/libsemver src/semver po doc/doxygen
 
 dist_doc_DATA  = README.md
 dist_doc_DATA += AUTHORS CONTRIBUTING.md COPYING LICENSE NEWS
