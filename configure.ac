@@ -29,6 +29,7 @@ AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([src/libsemver/Makefile])
 AC_CONFIG_FILES([src/semver/Makefile])
 AC_CONFIG_FILES([po/Makefile.in])
+AC_CONFIG_FILES([doc/doxygen/Makefile])
 AC_CONFIG_MACRO_DIRS([m4])
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -51,6 +52,12 @@ AC_LANG(C++)
 
 # Checks for programs.
 AC_PROG_CXX
+
+AC_CHECK_PROGS([DOXYGEN], [doxygen])
+test -z "${DOXYGEN}" && AC_MSG_WARN([Doxygen support disabled])
+
+AM_CONDITIONAL([HAVE_DOXYGEN], [test -n "${DOXYGEN}"])
+AM_COND_IF([HAVE_DOXYGEN], [AC_CONFIG_FILES(doc/doxygen/Doxyfile)])
 
 # Configure C++ compiler
 AX_CXX_COMPILE_STDCXX_11
