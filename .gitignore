@@ -1,3 +1,7 @@
+# Automatically generated files
+doc/doxygen/html/
+doc/doxygen/latex/
+
 # Binary files
 semver
 .libs
