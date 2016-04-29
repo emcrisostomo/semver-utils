@@ -28,3 +28,6 @@ dist-hook:
 # The recipe cannot assume a file in $(distdir) is writable.
 	chmod u+w $(distdir)/ChangeLog
 	git log --oneline --decorate >> $(distdir)/ChangeLog
+
+doxygen:
+	$(MAKE) -C doc/doxygen doxygen
