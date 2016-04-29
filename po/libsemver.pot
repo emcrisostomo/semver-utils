@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libsemver 1.0.0\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2016-04-30 00:18+0200\n"
+"POT-Creation-Date: 2016-04-30 01:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,7 +62,7 @@ msgid "Usage:\n"
 msgstr ""
 
 #: src/semver/semver.cpp:291
-msgid " [OPTION] ... path ...\n"
+msgid " (option)+ (version)+ \n"
 msgstr ""
 
 #: src/semver/semver.cpp:293
@@ -70,19 +70,39 @@ msgid "Options:\n"
 msgstr ""
 
 #: src/semver/semver.cpp:294
-msgid "Show this message.\n"
+msgid "Increment the specified version component.\n"
+msgstr ""
+
+#: src/semver/semver.cpp:295
+msgid "Compare two versions.\n"
 msgstr ""
 
 #: src/semver/semver.cpp:296
+msgid "Show this message.\n"
+msgstr ""
+
+#: src/semver/semver.cpp:297
+msgid "Reverse the sort order.\n"
+msgstr ""
+
+#: src/semver/semver.cpp:298
+msgid "Sort the versions.\n"
+msgstr ""
+
+#: src/semver/semver.cpp:299
+msgid "Validate a version.\n"
+msgstr ""
+
+#: src/semver/semver.cpp:301
 msgid ""
 "See the man page for more information.\n"
 "\n"
 msgstr ""
 
-#: src/semver/semver.cpp:297
+#: src/semver/semver.cpp:302
 msgid "Report bugs to <"
 msgstr ""
 
-#: src/semver/semver.cpp:298
+#: src/semver/semver.cpp:303
 msgid "Project home page: <"
 msgstr ""
