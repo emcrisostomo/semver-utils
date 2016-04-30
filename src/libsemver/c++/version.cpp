@@ -18,7 +18,54 @@
  *
  * @section introduction Introduction
  *
- * `libsemver` is a library that
+ * `libsemver` is a C++ library with C bindings that provides the following
+ * functionality:
+ *
+ *   - Parsing a version number into an object.
+ *   - Comparing versions.
+ *   - Modifying versions object.
+ *
+ * Versions are checked against _Semantic Versioning 2.0.0_
+ * (http://semver.org/).
+ *
+ * @section changelog Changelog
+ *
+ * See the @ref history "History" page.
+ *
+ * @section bindings Available Bindings
+ *
+ * `libsemver` is a C++ library with C bindings which makes it available to a
+ * wide range of programming languages.  If a programming language has C
+ * bindings, then `libsemver` can be used from it.  The C binding provides all
+ * the functionality provided by the C++ implementation and it can be used as a
+ * fallback solution when the C++ API cannot be used.
+ *
+ * @section libtools-versioning libtool's versioning scheme
+ *
+ * `libtool`'s versioning scheme is described by three integers:
+ * `current:revision:age` where:
+ *
+ *   - `current` is the most recent interface number implemented by the
+ *     library.
+ *   - `revision` is the implementation number of the current interface.
+ *   - `age` is the difference between the newest and the oldest interface that
+ *     the library implements.
+ *
+ * @section bug-reports Reporting Bugs and Suggestions
+ *
+ * If you find problems or have suggestions about this program or this manual,
+ * please report them as new issues in the official GitHub repository at
+ * https://github.com/emcrisostomo/semver-utils.  Please, read the
+ * `CONTRIBUTING.md` file for detailed instructions on how to contribute to
+ * `fswatch`.
+
+ */
+/**
+ * @page history History
+ *
+ * @section v600 1:0:0
+ *
+ *   - Initial release.
  */
 #include <algorithm>
 #include <iterator> // back_inserter

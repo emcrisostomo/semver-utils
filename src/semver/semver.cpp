@@ -222,13 +222,13 @@ void parse_opts(int argc, char **argv)
 
   int option_index = 0;
   static struct option long_options[] = {
-    {"bump",    required_argument, nullptr, 'b'},
-    {"compare", no_argument,       nullptr, 'c'},
-    {"help",    no_argument,       nullptr, 'h'},
-    {"reverse", no_argument,       nullptr, 'r'},
-    {"sort",    no_argument,       nullptr, 's'},
-    {"valid",   no_argument,       nullptr, 'v'},
-    {nullptr, 0,                   nullptr, 0}
+    {"bump",     required_argument, nullptr, 'b'},
+    {"compare",  no_argument,       nullptr, 'c'},
+    {"help",     no_argument,       nullptr, 'h'},
+    {"reverse",  no_argument,       nullptr, 'r'},
+    {"sort",     no_argument,       nullptr, 's'},
+    {"validate", no_argument,       nullptr, 'v'},
+    {nullptr,    0,                 nullptr, 0}
   };
 
   while ((ch = getopt_long(argc,
@@ -288,10 +288,15 @@ void usage(std::ostream& stream)
 {
   stream << PACKAGE_STRING << "\n\n";
   stream << _("Usage:\n");
-  stream << "semver" << _(" [OPTION] ... path ...\n");
+  stream << "semver" << _(" (option)+ (version)+ \n");
   stream << "\n";
   stream << _("Options:\n");
+  stream << " -b, --bump component  " << _("Increment the specified version component.\n");
+  stream << " -c, --compare         " << _("Compare two versions.\n");
   stream << " -h, --help            " << _("Show this message.\n");
+  stream << " -r, --reverse         " << _("Reverse the sort order.\n");
+  stream << " -s, --sort            " << _("Sort the versions.\n");
+  stream << " -v, --validate        " << _("Validate a version.\n");
   stream << "\n";
   stream << _("See the man page for more information.\n\n");
   stream << _("Report bugs to <") << PACKAGE_BUGREPORT << ">.\n";

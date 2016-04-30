@@ -19,12 +19,15 @@ ACLOCAL_AMFLAGS = -I m4
 libtool: $(LIBTOOL_DEPS)
 	$(SHELL) $(top_builddir)/config.status libtool
 
-SUBDIRS = src/libsemver src/semver po
+SUBDIRS = src/libsemver src/semver po doc/doxygen
 
 dist_doc_DATA  = README.md
-dist_doc_DATA += AUTHORS COPYING LICENSE NEWS
+dist_doc_DATA += AUTHORS CONTRIBUTING.md COPYING LICENSE NEWS
 
 dist-hook:
 # The recipe cannot assume a file in $(distdir) is writable.
 	chmod u+w $(distdir)/ChangeLog
 	git log --oneline --decorate >> $(distdir)/ChangeLog
+
+doxygen:
+	$(MAKE) -C doc/doxygen doxygen

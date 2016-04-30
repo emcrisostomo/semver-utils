@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: libsemver 1.0.0-develop\n"
+"Project-Id-Version: libsemver 1.0.0\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2016-04-28 19:18+0200\n"
+"POT-Creation-Date: 2016-04-30 01:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +17,23 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/libsemver/c++/version.cpp:78
+#: src/libsemver/c++/version.cpp:131
 msgid "Invalid version: "
 msgstr ""
 
-#: src/libsemver/c++/version.cpp:272
+#: src/libsemver/c++/version.cpp:325
 msgid "Invalid identifier: "
 msgstr ""
 
-#: src/libsemver/c++/version.cpp:282
+#: src/libsemver/c++/version.cpp:335
 msgid "Numerical identifier cannot contain leading zeroes."
 msgstr ""
 
-#: src/libsemver/c++/version.cpp:288
+#: src/libsemver/c++/version.cpp:341
 msgid "Invalid prerelease: "
 msgstr ""
 
-#: src/libsemver/c++/version.cpp:294
+#: src/libsemver/c++/version.cpp:347
 msgid "Invalid metadata: "
 msgstr ""
 
@@ -62,7 +62,7 @@ msgid "Usage:\n"
 msgstr ""
 
 #: src/semver/semver.cpp:291
-msgid " [OPTION] ... path ...\n"
+msgid " (option)+ (version)+ \n"
 msgstr ""
 
 #: src/semver/semver.cpp:293
@@ -70,19 +70,39 @@ msgid "Options:\n"
 msgstr ""
 
 #: src/semver/semver.cpp:294
-msgid "Show this message.\n"
+msgid "Increment the specified version component.\n"
+msgstr ""
+
+#: src/semver/semver.cpp:295
+msgid "Compare two versions.\n"
 msgstr ""
 
 #: src/semver/semver.cpp:296
+msgid "Show this message.\n"
+msgstr ""
+
+#: src/semver/semver.cpp:297
+msgid "Reverse the sort order.\n"
+msgstr ""
+
+#: src/semver/semver.cpp:298
+msgid "Sort the versions.\n"
+msgstr ""
+
+#: src/semver/semver.cpp:299
+msgid "Validate a version.\n"
+msgstr ""
+
+#: src/semver/semver.cpp:301
 msgid ""
 "See the man page for more information.\n"
 "\n"
 msgstr ""
 
-#: src/semver/semver.cpp:297
+#: src/semver/semver.cpp:302
 msgid "Report bugs to <"
 msgstr ""
 
-#: src/semver/semver.cpp:298
+#: src/semver/semver.cpp:303
 msgid "Project home page: <"
 msgstr ""
