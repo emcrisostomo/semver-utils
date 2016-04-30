@@ -17,8 +17,8 @@ if HAVE_DOXYGEN
 DOXYGEN_TARGETS = doc-html-doxygen doc-pdf-doxygen
 endif
 
-.PHONY: doxygen
-doxygen: $(DOXYGEN_TARGETS)
+.PHONY: doxygen-local
+doxygen-local: $(DOXYGEN_TARGETS)
 
 .PHONY: doc-html-doxygen
 doc-html-doxygen:

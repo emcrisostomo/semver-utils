@@ -37,6 +37,7 @@ AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([-Wall -Werror gnu subdir-objects 1.14.1])
 AM_SILENT_RULES([yes])
 AM_PROG_AR
+AM_EXTRA_RECURSIVE_TARGETS([doxygen])
 
 # Initialize libtool
 LT_PREREQ([2.4.2])
