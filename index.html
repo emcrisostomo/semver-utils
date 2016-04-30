@@ -49,11 +49,7 @@ complying with <a href="http://semver.org/">Semantic Versioning 2.0.0</a>.</p>
 
 <ul>
 <li><a href="#features">Features</a></li>
-<li><a href="#building-from-source">Building from Source</a></li>
-<li><a href="#installation">Installation</a></li>
 <li><a href="#documentation">Documentation</a></li>
-<li><a href="#localization">Localization</a></li>
-<li><a href="#usage">Usage</a></li>
 <li><a href="#contributing">Contributing</a></li>
 <li><a href="#bug-reports">Bug Reports</a></li>
 </ul>
@@ -78,48 +74,6 @@ functionality:</p>
 </ul>
 
 <h2>
-<a id="building-from-source" class="anchor" href="#building-from-source" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Building from Source</h2>
-
-<p>A user who wishes to build <code>libsemver</code> should get a <a href="https://github.com/emcrisostomo/semver-utils/releases">release tarball</a>.
-A release tarball contains everything a user needs to build <code>libsemver</code> on their
-system, following the instructions detailed in the <a href="#installation">Installation</a>
-section below and the <code>INSTALL</code> file.</p>
-
-<p>A developer who wishes to modify <code>libsemver</code> should get the sources (either from
-a source tarball or cloning the repository) and have the GNU Build System
-installed on their machine.  Please read <code>README.gnu-build-system</code> to get
-further details about how to bootstrap <code>libsemver</code> from sources on your machine.</p>
-
-<p>Getting a copy of the source repository is not recommended unless you are a
-developer, you have the GNU Build System installed on your machine, and you know
-how to bootstrap it on the sources.</p>
-
-<h2>
-<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
-
-<p>See the <code>INSTALL</code> file for detailed information about how to configure and
-install this package.  Since <code>semver</code> builds and uses dynamic libraries, in some
-platforms you may need to perform additional tasks before you can use it:</p>
-
-<ul>
-<li><p>Make sure the installation directory of dynamic libraries (<code>$PREFIX/lib</code>) is
-included in the lookup paths of the dynamic linker of your operating system.
-The default path, <code>/usr/local/lib</code>, will work in nearly every operating
-system.</p></li>
-<li>
-<p>Refreshing the links and cache to the dynamic libraries may be required.  In
-GNU/Linux systems you may need to run <code>ldconfig</code>:</p>
-
-<pre><code>$ ldconfig
-</code></pre>
-</li>
-</ul>
-
-<p><code>libsemver</code> is a C++ program and a C++ compiler compliant with the C++11 standard
-is required to compile it.  Check your OS documentation for information about
-how to install the C++ toolchain and the C++ runtime.</p>
-
-<h2>
 <a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Documentation</h2>
 
 <p><code>libsemver</code> provides the following documentation:</p>
@@ -128,55 +82,6 @@ how to install the C++ toolchain and the C++ runtime.</p>
 <li>HTML documentation.</li>
 <li>PDF documentation.</li>
 </ul>
-
-<h2>
-<a id="localization" class="anchor" href="#localization" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Localization</h2>
-
-<p><code>libsemver</code> is localizable and internally it uses GNU <code>gettext</code> to decouple
-localizable string from their translation.  The currently available locales are:</p>
-
-<ul>
-<li>English (<code>en</code>).</li>
-<li>Italian (<code>it</code>).</li>
-<li>Spanish (<code>es</code>).</li>
-</ul>
-
-<p>To build <code>libsemver</code> with localization support, you need to have <code>gettext</code>
-installed on your system.  If <code>configure</code> cannot find <code>&lt;libintl.h&gt;</code> or the
-linker cannot find <code>libintl</code>, then you may need to manually provide their
-location to <code>configure</code>, usually using the <code>CPPFLAGS</code> and the <code>LDFLAGS</code>
-variables.  See <code>README.osx</code> for an example.</p>
-
-<p>If <code>gettext</code> is not available on your system, <code>libsemver</code> shall build correctly,
-but it will lack localization support and the only available locale will be
-English.</p>
-
-<h2>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
-
-<p><code>semver</code> accepts a list of versions as parameters and the operation performed on
-them depends on the command being executed.</p>
-
-<pre><code>$ semver command [options] ... version-0 ... version-n
-</code></pre>
-
-<p>The maximum number of accepted arguments depends on the <code>command</code> being
-executed.</p>
-
-<p><code>command</code> may be one of the following:</p>
-
-<ul>
-<li><p><code>-b</code>: versions are <em>bumped</em>.</p></li>
-<li><p><code>-c</code>: versions are <em>compared</em>.</p></li>
-<li><p><code>-s</code>: versions are <em>sorted</em>.</p></li>
-<li><p><code>-v</code>: versions are <em>verified</em>.</p></li>
-</ul>
-
-<p>For more information, refer to the <code>semver</code> documentation or the output of the
-following command:</p>
-
-<pre><code>$ semver --help
-</code></pre>
 
 <h2>
 <a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h2>
