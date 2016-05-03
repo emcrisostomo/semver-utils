@@ -4,10 +4,10 @@
 #include <unistd.h> // isatty()
 #include <cstdio> // fileno()
 #include <vector>
-#include <libsemver/gettext.h>
-#include <libsemver/gettext_defs.h>
-#include "libsemver/c++/version.hpp"
 #include "../../libsemver_config.h"
+#include "libsemver/gettext.h"
+#include "libsemver/gettext_defs.h"
+#include "libsemver/c++/version.hpp"
 
 static bool command_set = false;
 static bool bflag = false;
@@ -28,7 +28,6 @@ static int sort_versions(std::vector<std::string> vector);
 
 int main(int argc, char **argv)
 {
-  // Trigger gettext operations
 #ifdef ENABLE_NLS
   setlocale(LC_ALL, "");
   bindtextdomain(PACKAGE, LOCALEDIR);
