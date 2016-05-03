@@ -5,8 +5,8 @@
 #include <cstdio> // fileno()
 #include <vector>
 #include "../../libsemver_config.h"
-#include <libsemver/gettext.h>
-#include <libsemver/gettext_defs.h>
+#include "libsemver/gettext.h"
+#include "libsemver/gettext_defs.h"
 #include "libsemver/c++/version.hpp"
 
 static bool command_set = false;
