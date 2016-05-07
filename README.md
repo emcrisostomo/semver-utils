@@ -122,11 +122,41 @@ executed.
 
   * `-b`: versions are _bumped_.
 
+        $ semver -b major 1.2.3
+        2.0.0
+        $ semver -b major 1.3.4
+        2.0.0
+        $ semver -b minor 1.3.4
+        1.4.0
+        $ semver -b patch 1.3.4
+        1.3.5
+
   * `-c`: versions are _compared_.
+
+        $ semver -c 1.3.4 2.3.0
+        $ echo $?
+        1
+        $ semver -c 2.3.0 1.3.4
+        $ echo $?
+        2
+        $ semver -c 2.3.0 2.3.0
+        $ echo $?
+        0
 
   * `-s`: versions are _sorted_.
 
+        $ semver -s 2.3.0 1.3.0 5.0.0
+        1.3.0
+        2.3.0
+        5.0.0
+
   * `-v`: versions are _verified_.
+
+        $ semver -v 1.3.5-develop+x86
+        $ echo $?
+        0
+        $ semver -v 1.3.5-develop.03
+        Numerical identifier cannot contain leading zeroes.
 
 For more information, refer to the `semver` documentation or the output of the
 following command:
