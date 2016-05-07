@@ -80,9 +80,9 @@
 namespace semver
 {
   static std::vector<unsigned int> parse_version(const std::string& v);
+  static std::vector<std::string> parse_prerelease(const std::string& v);
   static void match_prerelease(const std::string& s);
   static void match_metadata(const std::string& s);
-  static void check_prerelease(const std::string& s);
   static void check_identifier(const std::string& s);
   static const std::string PRERELEASE_PATTERN(
     "([0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)");
@@ -130,12 +130,9 @@ namespace semver
     if (!std::regex_match(v, fragments, version_grammar))
       throw std::invalid_argument(_("Invalid version: ") + v);
 
-    std::vector<unsigned int> version =
-      parse_version(fragments[VERSION_INDEX].str());
-    std::string prerelease = fragments[PRERELEASE_INDEX].str();
-    std::string metadata = fragments[METADATA_INDEX].str();
-
-    return semver::version(version, prerelease, metadata);
+    return semver::version(parse_version(fragments[VERSION_INDEX].str()),
+                           fragments[PRERELEASE_INDEX].str(),
+                           fragments[METADATA_INDEX].str());
   }
 
   version::version(const std::vector<unsigned int> versions,
@@ -151,7 +148,7 @@ namespace semver
     if (prerelease.size() > 0)
     {
       match_prerelease(prerelease);
-      check_prerelease(prerelease);
+      prerelease_identifiers = parse_prerelease(prerelease);
     }
 
     if (metadata.size() > 0)
@@ -254,15 +251,18 @@ namespace semver
 
   bool version::operator==(const version& v) const
   {
-    return versions == v.versions
-           && prerelease == v.prerelease
-           && metadata == v.metadata;
+    return versions == v.versions && prerelease == v.prerelease;
   }
 
   bool version::operator<(const version& v) const
   {
-    for (unsigned int i = 0; i < std::max(versions.size(), v.versions.size()); ++i)
+    // Compare version number
+    for (auto i = 0; i < std::max(versions.size(), v.versions.size()); ++i)
     {
+      // The shortest number has higher precedence.
+      if (i == versions.size()) return true;
+      if (i == v.versions.size()) return false;
+
       unsigned int lh = get_version(i);
       unsigned int rh = v.get_version(i);
 
@@ -270,6 +270,7 @@ namespace semver
       else if (lh > rh) return false;
     }
 
+    // Compare prerelease
     return false;
   }
 
@@ -303,20 +304,24 @@ namespace semver
     return results;
   }
 
-  void check_prerelease(const std::string& s)
+  std::vector<std::string> parse_prerelease(const std::string& s)
   {
     std::regex separator("\\.");
     std::sregex_token_iterator first(s.begin(), s.end(), separator, -1);
     std::sregex_token_iterator last;
 
+    std::vector<std::string> results;
     std::for_each(
       first,
       last,
-      [](std::string t)
+      [&results](std::string t)
       {
         check_identifier(t);
+        results.push_back(t);
       }
     );
+
+    return results;
   }
 
   void check_identifier(const std::string& s)

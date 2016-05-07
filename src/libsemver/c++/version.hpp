@@ -53,6 +53,7 @@ namespace semver
   private:
     std::vector<unsigned int> versions;
     std::string prerelease;
+    std::vector<std::string> prerelease_identifiers;
     std::string metadata;
 
   public:
