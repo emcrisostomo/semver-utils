@@ -122,8 +122,6 @@ executed.
 
   * `-b`: versions are _bumped_.
 
-        $ semver -b major 1.2.3
-        2.0.0
         $ semver -b major 1.3.4
         2.0.0
         $ semver -b minor 1.3.4
