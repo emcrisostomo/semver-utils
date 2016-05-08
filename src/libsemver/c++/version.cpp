@@ -256,7 +256,7 @@ namespace semver
   bool version::operator<(const version& v) const
   {
     // Compare version number.
-    for (auto i = 0; i < std::max(versions.size(), v.versions.size()); ++i)
+    for (unsigned int i = 0; i < std::max(versions.size(), v.versions.size()); ++i)
     {
       // The shortest number is the lesser.
       if (i == versions.size()) return true;
@@ -276,8 +276,7 @@ namespace semver
     if (is_release() ^ v.is_release()) return !is_release();
 
     for (auto i = 0;
-         i < std::max(prerelease_identifiers.size(),
-                      v.prerelease_identifiers.size());
+         i < std::max(prerelease_identifiers.size(), v.prerelease_identifiers.size());
          ++i)
     {
       // The shorted prerelease is the lesser.
@@ -291,12 +290,16 @@ namespace semver
 
         if (lh < rh) return true;
         if (lh > rh) return false;
+
+        continue;
       }
 
       if (!prerelease_is_identifier_number[i] && !v.prerelease_is_identifier_number[i])
       {
         if (prerelease_identifiers[i] < v.prerelease_identifiers[i]) return true;
         if (prerelease_identifiers[i] > v.prerelease_identifiers[i]) return false;
+
+        continue;
       }
 
       return prerelease_is_identifier_number[i];
