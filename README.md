@@ -163,6 +163,8 @@ executed.
         0
         $ semver -v 1.3.5-develop.03
         Numerical identifier cannot contain leading zeroes.
+        $ echo $?
+        1
 
 For more information, refer to the `semver` documentation or the output of the
 following command:
