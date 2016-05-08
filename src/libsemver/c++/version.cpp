@@ -341,21 +341,21 @@ namespace semver
     std::sregex_token_iterator first(prerelease.begin(), prerelease.end(), separator, -1);
     std::sregex_token_iterator last;
 
-    for (auto it = first; it != last; ++it)
-    {
-      const std::string& s = *it;
+    std::for_each(
+      first,
+      last,
+      [this](std::string s)
+      {
+        check_identifier(s);
 
-      check_identifier(s);
-
-      prerelease_is_identifier_number[std::distance(it, first)] =
-        !s.empty()
-        && std::find_if(s.begin(),
-                        s.end(),
-                        [](char c) { return !std::isdigit(c); }) == s.end();
-      prerelease_identifiers.push_back(*it);
-    }
-
-    return;
+        bool is_number = !s.empty()
+                         && std::find_if(s.begin(),
+                                         s.end(),
+                                         [](char c) { return !std::isdigit(c); }) == s.end();
+        prerelease_is_identifier_number.push_back(is_number);
+        prerelease_number.push_back(is_number ? std::stoul(s) : 0);
+        prerelease_identifiers.push_back(s);
+      });
   }
 
   void check_identifier(const std::string& s)
