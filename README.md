@@ -145,10 +145,16 @@ executed.
 
   * `-s`: versions are _sorted_.
 
-        $ semver -s 2.3.0 1.3.0 5.0.0
-        1.3.0
-        2.3.0
-        5.0.0
+        $ semver -s 1.0.0 1.0.0-rc.1 1.0.0-beta.11 1.0.0-beta.2 \
+                    1.0.0-beta 1.0.0-alpha.beta 1.0.0-alpha.1 1.0.0-alpha
+        1.0.0-alpha
+        1.0.0-alpha.1
+        1.0.0-alpha.beta
+        1.0.0-beta
+        1.0.0-beta.2
+        1.0.0-beta.11
+        1.0.0-rc.1
+        1.0.0
 
   * `-v`: versions are _verified_.
 
