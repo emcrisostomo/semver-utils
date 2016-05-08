@@ -54,7 +54,10 @@ namespace semver
     std::vector<unsigned int> versions;
     std::string prerelease;
     std::vector<std::string> prerelease_identifiers;
+    std::vector<bool> prerelease_is_identifier_number;
     std::string metadata;
+
+    void parse_prerelease();
 
   public:
     /**
