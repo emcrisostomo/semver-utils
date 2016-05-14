@@ -82,7 +82,6 @@ namespace semver
   static std::vector<unsigned int> parse_version(const std::string& v);
   static void match_prerelease(const std::string& s);
   static void match_metadata(const std::string& s);
-  static void check_prerelease(const std::string& s);
   static void check_identifier(const std::string& s);
   static const std::string PRERELEASE_PATTERN(
     "([0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)");
@@ -130,12 +129,9 @@ namespace semver
     if (!std::regex_match(v, fragments, version_grammar))
       throw std::invalid_argument(_("Invalid version: ") + v);
 
-    std::vector<unsigned int> version =
-      parse_version(fragments[VERSION_INDEX].str());
-    std::string prerelease = fragments[PRERELEASE_INDEX].str();
-    std::string metadata = fragments[METADATA_INDEX].str();
-
-    return semver::version(version, prerelease, metadata);
+    return semver::version(parse_version(fragments[VERSION_INDEX].str()),
+                           fragments[PRERELEASE_INDEX].str(),
+                           fragments[METADATA_INDEX].str());
   }
 
   version::version(const std::vector<unsigned int> versions,
@@ -151,7 +147,7 @@ namespace semver
     if (prerelease.size() > 0)
     {
       match_prerelease(prerelease);
-      check_prerelease(prerelease);
+      parse_prerelease();
     }
 
     if (metadata.size() > 0)
@@ -254,20 +250,59 @@ namespace semver
 
   bool version::operator==(const version& v) const
   {
-    return versions == v.versions
-           && prerelease == v.prerelease
-           && metadata == v.metadata;
+    return versions == v.versions && prerelease == v.prerelease;
   }
 
   bool version::operator<(const version& v) const
   {
+    // Compare version number.
     for (unsigned int i = 0; i < std::max(versions.size(), v.versions.size()); ++i)
     {
+      // The shortest number is the lesser.
+      if (i == versions.size()) return true;
+      if (i == v.versions.size()) return false;
+
       unsigned int lh = get_version(i);
       unsigned int rh = v.get_version(i);
 
       if (lh < rh) return true;
       else if (lh > rh) return false;
+    }
+
+    // Compare prerelease identifiers.
+    if (prerelease == v.prerelease) return false;
+
+    // If either one, but not both, are release versions, release is greater.
+    if (is_release() ^ v.is_release()) return !is_release();
+
+    for (auto i = 0;
+         i < std::max(prerelease_identifiers.size(), v.prerelease_identifiers.size());
+         ++i)
+    {
+      // The shorted prerelease is the lesser.
+      if (i == prerelease_identifiers.size()) return true;
+      if (i == v.prerelease_identifiers.size()) return false;
+
+      if (prerelease_is_identifier_number[i] && v.prerelease_is_identifier_number[i])
+      {
+        unsigned long lh = std::stoul(prerelease_identifiers[i]);
+        unsigned long rh = std::stoul(v.prerelease_identifiers[i]);
+
+        if (lh < rh) return true;
+        if (lh > rh) return false;
+
+        continue;
+      }
+
+      if (!prerelease_is_identifier_number[i] && !v.prerelease_is_identifier_number[i])
+      {
+        if (prerelease_identifiers[i] < v.prerelease_identifiers[i]) return true;
+        if (prerelease_identifiers[i] > v.prerelease_identifiers[i]) return false;
+
+        continue;
+      }
+
+      return prerelease_is_identifier_number[i];
     }
 
     return false;
@@ -303,25 +338,32 @@ namespace semver
     return results;
   }
 
-  void check_prerelease(const std::string& s)
+  void version::parse_prerelease()
   {
     std::regex separator("\\.");
-    std::sregex_token_iterator first(s.begin(), s.end(), separator, -1);
+    std::sregex_token_iterator first(prerelease.begin(), prerelease.end(), separator, -1);
     std::sregex_token_iterator last;
 
     std::for_each(
       first,
       last,
-      [](std::string t)
+      [this](std::string s)
       {
-        check_identifier(t);
-      }
-    );
+        check_identifier(s);
+
+        bool is_number = !s.empty()
+                         && std::find_if(s.begin(),
+                                         s.end(),
+                                         [](char c) { return !std::isdigit(c); }) == s.end();
+        prerelease_is_identifier_number.push_back(is_number);
+        prerelease_number.push_back(is_number ? std::stoul(s) : 0);
+        prerelease_identifiers.push_back(s);
+      });
   }
 
   void check_identifier(const std::string& s)
   {
-    if (s.size() == 0)
+    if (s.empty())
       throw std::invalid_argument(_("Invalid identifier: ") + s);
 
     if (s[0] != '0') return;

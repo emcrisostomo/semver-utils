@@ -125,11 +125,9 @@ int compare_versions(std::vector<std::string> vector)
   try
   {
     semver::version first =
-      semver::version::from_string(
-        vector[0]).strip_prerelease().strip_metadata();
+      semver::version::from_string(vector[0]).strip_metadata();
     semver::version second =
-      semver::version::from_string(
-        vector[1]).strip_prerelease().strip_metadata();
+      semver::version::from_string(vector[1]).strip_metadata();
 
     if (first == second) return 0;
     return first < second ? 1 : 2;
