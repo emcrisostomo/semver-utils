@@ -1,6 +1,10 @@
 NEWS
 ====
 
+New in 1.1.0:
+
+  * Implement sorting taking prerelease identifiers into account.
+
 New in 1.0.1:
 
   * Fix bug that prevented localization to work properly.
