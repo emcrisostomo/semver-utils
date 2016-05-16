@@ -40,9 +40,42 @@
 namespace semver
 {
   /**
+   * @brief Class that represents a prerelease identifier.
+   *
+   * This class represents a prerelease identifier complying with _Semantic
+   * Versioning_ 2.0.0 (http://semver.org/).
+   */
+  class prerelease_component
+  {
+  private:
+    /**
+     * @brief Indicates whether the component is a number.
+     */
+    bool is_number;
+
+    /**
+     * @brief The component representation as a string.
+     */
+    std::string identifier;
+
+    /**
+     * @brief The component numeric value.
+     *
+     * This field is meaningful only if the current component is a number.
+     */
+    unsigned long value_as_number;
+
+  public:
+    prerelease_component(std::string s);
+    bool operator<(const prerelease_component& rh) const;
+    bool operator>(const prerelease_component& rh) const;
+    bool operator==(const prerelease_component& v) const;
+  };
+
+  /**
    * @brief Class that represents a version number.
    *
-   * This class represents a version number complying with _Semantic Versioning
+   * This class represents a version number complying with _Semantic Versioning_
    * 2.0.0 (http://semver.org/).  As a supported extension this class allows
    * version numbers to contain any number of components greater than 2.
    *
@@ -53,9 +86,7 @@ namespace semver
   private:
     std::vector<unsigned int> versions;
     std::string prerelease;
-    std::vector<std::string> prerelease_identifiers;
-    std::vector<bool> prerelease_is_identifier_number;
-    std::vector<unsigned long> prerelease_number;
+    std::vector<prerelease_component> prerelease_comp;
     std::string metadata;
 
     void parse_prerelease();

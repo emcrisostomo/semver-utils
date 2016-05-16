@@ -88,6 +88,33 @@ namespace semver
   static const std::string METADATA_PATTERN(
     "([0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)");
 
+  prerelease_component::prerelease_component(std::string s) :
+    identifier(std::move(s))
+  {
+    is_number = !identifier.empty()
+                && std::find_if(identifier.begin(),
+                                identifier.end(),
+                                [](char c) { return !std::isdigit(c); }) == identifier.end();
+    value_as_number = is_number ? std::stoul(identifier) : 0;
+  }
+
+  bool prerelease_component::operator==(const prerelease_component& v) const
+  {
+    return identifier == v.identifier;
+  }
+
+  bool prerelease_component::operator<(const prerelease_component& rh) const
+  {
+    if (is_number && rh.is_number) return value_as_number < rh.value_as_number;
+    if (!is_number && !rh.is_number) return identifier < rh.identifier;
+    return is_number;
+  }
+
+  bool prerelease_component::operator>(const prerelease_component& rh) const
+  {
+    return (rh < *this);
+  }
+
   version version::from_string(std::string v)
   {
     // SemVer 2.0.0
@@ -265,37 +292,7 @@ namespace semver
     // If either one, but not both, are release versions, release is greater.
     if (is_release() ^ v.is_release()) return !is_release();
 
-    for (auto i = 0;
-         i < std::max(prerelease_identifiers.size(), v.prerelease_identifiers.size());
-         ++i)
-    {
-      // The shorter the prerelease, the lesser.
-      if (i == prerelease_identifiers.size()) return true;
-      if (i == v.prerelease_identifiers.size()) return false;
-
-      if (prerelease_is_identifier_number[i] && v.prerelease_is_identifier_number[i])
-      {
-        unsigned long lh = std::stoul(prerelease_identifiers[i]);
-        unsigned long rh = std::stoul(v.prerelease_identifiers[i]);
-
-        if (lh < rh) return true;
-        if (lh > rh) return false;
-
-        continue;
-      }
-
-      if (!prerelease_is_identifier_number[i] && !v.prerelease_is_identifier_number[i])
-      {
-        if (prerelease_identifiers[i] < v.prerelease_identifiers[i]) return true;
-        if (prerelease_identifiers[i] > v.prerelease_identifiers[i]) return false;
-
-        continue;
-      }
-
-      return prerelease_is_identifier_number[i];
-    }
-
-    return false;
+    return prerelease_comp < v.prerelease_comp;
   }
 
   bool version::operator>(const version& v) const
@@ -341,13 +338,7 @@ namespace semver
       {
         check_identifier(s);
 
-        bool is_number = !s.empty()
-                         && std::find_if(s.begin(),
-                                         s.end(),
-                                         [](char c) { return !std::isdigit(c); }) == s.end();
-        prerelease_is_identifier_number.push_back(is_number);
-        prerelease_number.push_back(is_number ? std::stoul(s) : 0);
-        prerelease_identifiers.push_back(s);
+        prerelease_comp.push_back(prerelease_component(s));
       });
   }
 
