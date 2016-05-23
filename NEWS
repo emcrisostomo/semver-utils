@@ -1,6 +1,12 @@
 NEWS
 ====
 
+New in 1.1.1:
+
+  * Simplify version comparison logic.
+  * Encapsulate prerelease version components and their behaviour in a separate
+    class.
+
 New in 1.1.0:
 
   * Implement sorting taking prerelease identifiers into account.

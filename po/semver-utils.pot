@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: semver-utils 1.1.0\n"
+"Project-Id-Version: semver-utils 1.1.1\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2016-05-14 18:48+0200\n"
+"POT-Creation-Date: 2016-05-23 15:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +17,23 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/libsemver/c++/version.cpp:130
+#: src/libsemver/c++/version.cpp:157
 msgid "Invalid version: "
 msgstr ""
 
-#: src/libsemver/c++/version.cpp:367
+#: src/libsemver/c++/version.cpp:348
 msgid "Invalid identifier: "
 msgstr ""
 
-#: src/libsemver/c++/version.cpp:377
+#: src/libsemver/c++/version.cpp:358
 msgid "Numerical identifier cannot contain leading zeroes."
 msgstr ""
 
-#: src/libsemver/c++/version.cpp:383
+#: src/libsemver/c++/version.cpp:364
 msgid "Invalid prerelease: "
 msgstr ""
 
-#: src/libsemver/c++/version.cpp:389
+#: src/libsemver/c++/version.cpp:370
 msgid "Invalid metadata: "
 msgstr ""
 
