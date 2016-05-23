@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: semver-utils 1.1.0-develop\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2016-05-14 18:48+0200\n"
+"POT-Creation-Date: 2016-05-23 15:34+0200\n"
 "PO-Revision-Date: 2016-05-02 12:48+0200\n"
 "Last-Translator: Enrico Maria Crisostomo <enrico.m.crisostomo@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -17,23 +17,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/libsemver/c++/version.cpp:130
+#: src/libsemver/c++/version.cpp:157
 msgid "Invalid version: "
 msgstr "Versione invalida: "
 
-#: src/libsemver/c++/version.cpp:367
+#: src/libsemver/c++/version.cpp:348
 msgid "Invalid identifier: "
 msgstr "Identificatore invalido: "
 
-#: src/libsemver/c++/version.cpp:377
+#: src/libsemver/c++/version.cpp:358
 msgid "Numerical identifier cannot contain leading zeroes."
 msgstr "Identificatore numerico non può avere zeri a sinistra."
 
-#: src/libsemver/c++/version.cpp:383
+#: src/libsemver/c++/version.cpp:364
 msgid "Invalid prerelease: "
 msgstr "Prerelease invalida: "
 
-#: src/libsemver/c++/version.cpp:389
+#: src/libsemver/c++/version.cpp:370
 msgid "Invalid metadata: "
 msgstr "Metadati invalidi: "
 
