@@ -33,6 +33,14 @@ AC_CONFIG_FILES([doc/doxygen/Makefile])
 AC_CONFIG_MACRO_DIRS([m4])
 AC_CONFIG_MACRO_DIR([m4])
 
+# Compute the canonical target-system type variables
+AC_CANONICAL_TARGET
+AC_SUBST([TARGET_VENDOR])
+AC_SUBST([TARGET_OS])
+
+# OS-specific treatment
+AM_CONDITIONAL([OS_CYGWIN], [test "${target_os}" = "cygwin"])
+
 # Initialize Automake
 AM_INIT_AUTOMAKE([-Wall -Werror gnu subdir-objects 1.14.1])
 AM_SILENT_RULES([yes])
@@ -46,6 +54,7 @@ AC_SUBST([LIBTOOL_DEPS])
 # Initialize gettext
 AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION([0.19.4])
+
 
 # Configure language
 AC_LANG(C++)
