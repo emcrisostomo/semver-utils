@@ -31,6 +31,10 @@ libsemver_la_SOURCES += gettext_defs.h
 libsemver_la_LDFLAGS  = -version-info $(LIBSEMVER_API_VERSION)
 libsemver_la_LDFLAGS += @LTLIBINTL@
 
+if OS_CYGWIN
+  libsemver_la_LDFLAGS += -no-undefined
+endif
+
 # Define separate include directories for C and C++ headers.
 libsemver_cdir = $(pkgincludedir)/c
 libsemver_cppdir = $(pkgincludedir)/c++
