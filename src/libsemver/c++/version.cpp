@@ -187,7 +187,7 @@ namespace semver
   {
     std::string out = std::to_string(versions[0]);
 
-    for (auto i = 1; i < versions.size(); ++i)
+    for (size_t i = 1; i < versions.size(); ++i)
     {
       out += ".";
       out += std::to_string(versions[i]);
@@ -238,7 +238,7 @@ namespace semver
     {
       bumped_versions[index] += 1;
 
-      for (int i = index + 1; i < bumped_versions.size(); ++i)
+      for (size_t i = index + 1; i < bumped_versions.size(); ++i)
         bumped_versions[i] = 0;
     }
 
@@ -349,7 +349,7 @@ namespace semver
 
     if (s[0] != '0') return;
 
-    for (int i = 1; i < s.size(); ++i)
+    for (size_t i = 1; i < s.size(); ++i)
     {
       if (!std::isdigit(s[i])) return;
     }

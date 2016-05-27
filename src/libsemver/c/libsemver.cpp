@@ -28,6 +28,7 @@
 #include "../gettext_defs.h"
 #include <exception>
 #include <cstdlib>
+#include <memory>
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
