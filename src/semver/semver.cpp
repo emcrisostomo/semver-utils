@@ -205,7 +205,7 @@ std::vector<std::string> read_arguments(int argc, char **argv)
   {
     while (std::cin >> pipe_input)
     {
-      arguments.push_back(pipe_input);
+      arguments.push_back(std::move(pipe_input));
     }
   }
 
