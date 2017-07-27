@@ -193,13 +193,13 @@ namespace semver
       out += std::to_string(versions[i]);
     }
 
-    if (prerelease.size() != 0)
+    if (!prerelease.empty())
     {
       out += "-";
       out += prerelease;
     }
 
-    if (metadata.size() != 0)
+    if (!metadata.empty())
     {
       out += "+";
       out += metadata;
@@ -272,7 +272,7 @@ namespace semver
 
   bool version::is_release() const
   {
-    return (prerelease.size() == 0);
+    return (prerelease.empty());
   }
 
   bool version::operator==(const version& v) const
