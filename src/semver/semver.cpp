@@ -21,10 +21,10 @@ static void parse_opts(int argc, char **argv);
 static std::vector<std::string> read_arguments(int argc, char **argv);
 static void usage(std::ostream& stream);
 
-static int bump_versions(std::vector<std::string> version);
-static int check_versions(std::vector<std::string> version);
-static int compare_versions(std::vector<std::string> version);
-static int sort_versions(std::vector<std::string> version);
+static int bump_versions(const std::vector<std::string>& version);
+static int check_versions(const std::vector<std::string>& version);
+static int compare_versions(const std::vector<std::string>& version);
+static int sort_versions(const std::vector<std::string>& version);
 
 int main(int argc, char **argv)
 {
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
   return 1;
 }
 
-int bump_versions(std::vector<std::string> version)
+int bump_versions(const std::vector<std::string>& version)
 {
   unsigned int index_to_bump;
 
@@ -111,7 +111,7 @@ int bump_versions(std::vector<std::string> version)
   return ret;
 }
 
-int compare_versions(std::vector<std::string> version)
+int compare_versions(const std::vector<std::string>& version)
 {
   if (version.size() != 2)
   {
@@ -136,7 +136,7 @@ int compare_versions(std::vector<std::string> version)
   }
 }
 
-int sort_versions(std::vector<std::string> version)
+int sort_versions(const std::vector<std::string>& version)
 {
   unsigned int ret = 0;
   std::vector<semver::version> versions;
@@ -169,7 +169,7 @@ int sort_versions(std::vector<std::string> version)
   return ret;
 }
 
-int check_versions(std::vector<std::string> version)
+int check_versions(const std::vector<std::string>& version)
 {
   int ret = 0;
 
