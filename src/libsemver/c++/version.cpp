@@ -171,13 +171,13 @@ namespace semver
     if (this->versions.size() < 2)
       throw std::invalid_argument("Version must contain at least two numbers.");
 
-    if (this->prerelease.size() > 0)
+    if (!this->prerelease.empty())
     {
       match_prerelease(this->prerelease);
       parse_prerelease();
     }
 
-    if (this->metadata.size() > 0)
+    if (!this->metadata.empty())
     {
       match_metadata(this->metadata);
     }
