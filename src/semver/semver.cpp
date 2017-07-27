@@ -25,6 +25,9 @@
 #include "libsemver/gettext_defs.h"
 #include "libsemver/c++/version.hpp"
 
+static const int OPT_VERSION = 128;
+static const int SEMVER_EXIT_OK = 0;
+
 static bool command_set = false;
 static bool bflag = false;
 static bool cflag = false;
@@ -41,6 +44,7 @@ static int bump_versions(const std::vector<std::string>& version);
 static int check_versions(const std::vector<std::string>& version);
 static int compare_versions(const std::vector<std::string>& version);
 static int sort_versions(const std::vector<std::string>& version);
+static void print_version();
 
 int main(int argc, char **argv)
 {
@@ -238,6 +242,7 @@ void parse_opts(int argc, char **argv)
     {"reverse",  no_argument,       nullptr, 'r'},
     {"sort",     no_argument,       nullptr, 's'},
     {"validate", no_argument,       nullptr, 'v'},
+    {"version",  no_argument,       nullptr, OPT_VERSION},
     {nullptr,    0,                 nullptr, 0}
   };
 
@@ -278,6 +283,10 @@ void parse_opts(int argc, char **argv)
       vflag = true;
       break;
 
+    case OPT_VERSION:
+      print_version();
+      exit(SEMVER_EXIT_OK);
+      
     case '?':
       exit(1);
 
@@ -292,6 +301,21 @@ void parse_opts(int argc, char **argv)
     std::cerr << _("-r can only be used with -s.\n");
     exit(1);
   }
+}
+
+void print_version()
+{
+  std::cout << PACKAGE_STRING << "\n";
+  std::cout <<
+         "Copyright (C) 2016-2017 Enrico M. Crisostomo <enrico.m.crisostomo@gmail.com>.\n";
+  std::cout <<
+         _("License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.\n");
+  std::cout <<
+         _("This is free software: you are free to change and redistribute it.\n");
+  std::cout << _("There is NO WARRANTY, to the extent permitted by law.\n");
+  std::cout << "\n";
+  std::cout << _("Written by Enrico M. Crisostomo.");
+  std::cout << std::endl;
 }
 
 void usage(std::ostream& stream)
