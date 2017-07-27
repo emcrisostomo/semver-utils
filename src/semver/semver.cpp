@@ -46,7 +46,7 @@ int main(int argc, char **argv)
   std::vector<std::string> args = read_arguments(argc, argv);
 
   // validate options
-  if (args.size() == 0)
+  if (args.empty())
   {
     std::cerr << _("Invalid number of arguments.\n");
     exit(1);
