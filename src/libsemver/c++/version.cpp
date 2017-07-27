@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Enrico M. Crisostomo
+ * Copyright (c) 2016-2017 Enrico M. Crisostomo
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -161,25 +161,25 @@ namespace semver
                            fragments[METADATA_INDEX].str());
   }
 
-  version::version(const std::vector<unsigned int> versions,
-                   const std::string prerelease,
-                   const std::string metadata) :
+  version::version(std::vector<unsigned int> versions,
+                   std::string prerelease,
+                   std::string metadata) :
     versions(std::move(versions)),
     prerelease(std::move(prerelease)),
     metadata(std::move(metadata))
   {
-    if (versions.size() < 2)
+    if (this->versions.size() < 2)
       throw std::invalid_argument("Version must contain at least two numbers.");
 
-    if (prerelease.size() > 0)
+    if (!this->prerelease.empty())
     {
-      match_prerelease(prerelease);
+      match_prerelease(this->prerelease);
       parse_prerelease();
     }
 
-    if (metadata.size() > 0)
+    if (!this->metadata.empty())
     {
-      match_metadata(metadata);
+      match_metadata(this->metadata);
     }
   }
 
@@ -193,13 +193,13 @@ namespace semver
       out += std::to_string(versions[i]);
     }
 
-    if (prerelease.size() != 0)
+    if (!prerelease.empty())
     {
       out += "-";
       out += prerelease;
     }
 
-    if (metadata.size() != 0)
+    if (!metadata.empty())
     {
       out += "+";
       out += metadata;
@@ -272,7 +272,7 @@ namespace semver
 
   bool version::is_release() const
   {
-    return (prerelease.size() == 0);
+    return (prerelease.empty());
   }
 
   bool version::operator==(const version& v) const
@@ -338,7 +338,7 @@ namespace semver
       {
         check_identifier(s);
 
-        prerelease_comp.push_back(prerelease_component(s));
+        prerelease_comp.emplace_back(s);
       });
   }
 

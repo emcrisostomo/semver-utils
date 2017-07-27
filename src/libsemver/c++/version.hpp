@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Enrico M. Crisostomo
+ * Copyright (c) 2016-2017 Enrico M. Crisostomo
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -118,9 +118,9 @@ namespace semver
      * @throws std::invalid_argument if the parameters do not comply with
      * _Semantic Versioning 2.0.0_.
      */
-    version(const std::vector<unsigned int> versions,
-            const std::string prerelease = "",
-            const std::string metadata = "");
+    version(std::vector<unsigned int> versions,
+            std::string prerelease = "",
+            std::string metadata = "");
 
     /**
      * @brief Converts a version to its string representation.

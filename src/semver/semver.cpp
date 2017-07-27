@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016-2017 Enrico M. Crisostomo
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 3, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include <algorithm>
 #include <iostream>
 #include <getopt.h>
@@ -21,10 +37,10 @@ static void parse_opts(int argc, char **argv);
 static std::vector<std::string> read_arguments(int argc, char **argv);
 static void usage(std::ostream& stream);
 
-static int bump_versions(std::vector<std::string> vers);
-static int check_versions(std::vector<std::string> vers);
-static int compare_versions(std::vector<std::string> vector);
-static int sort_versions(std::vector<std::string> vector);
+static int bump_versions(const std::vector<std::string>& version);
+static int check_versions(const std::vector<std::string>& version);
+static int compare_versions(const std::vector<std::string>& version);
+static int sort_versions(const std::vector<std::string>& version);
 
 int main(int argc, char **argv)
 {
@@ -46,7 +62,7 @@ int main(int argc, char **argv)
   std::vector<std::string> args = read_arguments(argc, argv);
 
   // validate options
-  if (args.size() == 0)
+  if (args.empty())
   {
     std::cerr << _("Invalid number of arguments.\n");
     exit(1);
@@ -62,22 +78,19 @@ int main(int argc, char **argv)
   return 1;
 }
 
-int bump_versions(std::vector<std::string> args)
+int bump_versions(const std::vector<std::string>& version)
 {
   unsigned int index_to_bump;
 
-  if (component_to_bump.compare("M") == 0
-      || component_to_bump.compare("major") == 0)
+  if (component_to_bump == "M" || component_to_bump == "major")
   {
     index_to_bump = 0;
   }
-  else if (component_to_bump.compare("m") == 0
-           || component_to_bump.compare("minor") == 0)
+  else if (component_to_bump == "m" || component_to_bump == "minor")
   {
     index_to_bump = 1;
   }
-  else if (component_to_bump.compare("p") == 0
-           || component_to_bump.compare("patch") == 0)
+  else if (component_to_bump == "p" || component_to_bump == "patch")
   {
     index_to_bump = 2;
   }
@@ -96,13 +109,13 @@ int bump_versions(std::vector<std::string> args)
 
   int ret = 0;
 
-  for (auto& v : args)
+  for (auto& v : version)
   {
     try
     {
       std::cout
-      << semver::version::from_string(v).bump(index_to_bump).str()
-      << "\n";
+        << semver::version::from_string(v).bump(index_to_bump).str()
+        << "\n";
     }
     catch (std::invalid_argument& ex)
     {
@@ -114,9 +127,9 @@ int bump_versions(std::vector<std::string> args)
   return ret;
 }
 
-int compare_versions(std::vector<std::string> vector)
+int compare_versions(const std::vector<std::string>& version)
 {
-  if (vector.size() != 2)
+  if (version.size() != 2)
   {
     std::cerr << _("Invalid number of arguments.\n");
     return 1;
@@ -125,9 +138,9 @@ int compare_versions(std::vector<std::string> vector)
   try
   {
     semver::version first =
-      semver::version::from_string(vector[0]).strip_metadata();
+      semver::version::from_string(version[0]).strip_metadata();
     semver::version second =
-      semver::version::from_string(vector[1]).strip_metadata();
+      semver::version::from_string(version[1]).strip_metadata();
 
     if (first == second) return 0;
     return first < second ? 1 : 2;
@@ -139,12 +152,12 @@ int compare_versions(std::vector<std::string> vector)
   }
 }
 
-int sort_versions(std::vector<std::string> args)
+int sort_versions(const std::vector<std::string>& version)
 {
   unsigned int ret = 0;
   std::vector<semver::version> versions;
 
-  for (auto& v : args)
+  for (auto& v : version)
   {
     try
     {
@@ -172,11 +185,11 @@ int sort_versions(std::vector<std::string> args)
   return ret;
 }
 
-int check_versions(std::vector<std::string> vers)
+int check_versions(const std::vector<std::string>& version)
 {
   int ret = 0;
 
-  for (auto v : vers)
+  for (const auto& v : version)
   {
     try
     {
@@ -196,7 +209,7 @@ std::vector<std::string> read_arguments(int argc, char **argv)
 {
   std::vector<std::string> arguments;
 
-  for (auto i = optind; i < argc; ++i) arguments.push_back(argv[i]);
+  for (auto i = optind; i < argc; ++i) arguments.emplace_back(argv[i]);
 
   // Read arguments from the standard input, if the program is not connected to
   // a terminal
@@ -205,7 +218,7 @@ std::vector<std::string> read_arguments(int argc, char **argv)
   {
     while (std::cin >> pipe_input)
     {
-      arguments.push_back(pipe_input);
+      arguments.push_back(std::move(pipe_input));
     }
   }
 
