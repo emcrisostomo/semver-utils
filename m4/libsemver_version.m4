@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2016 Enrico M. Crisostomo
+# Copyright (c) 2016-2017 Enrico M. Crisostomo
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -13,6 +13,6 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-m4_define([LIBSEMVER_VERSION], [1.1.3])
+m4_define([LIBSEMVER_VERSION], [1.2.0-develop])
 m4_define([LIBSEMVER_API_VERSION], [2:1:1])
 m4_define([LIBSEMVER_REVISION], [1])
