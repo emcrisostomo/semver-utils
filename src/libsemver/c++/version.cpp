@@ -161,25 +161,25 @@ namespace semver
                            fragments[METADATA_INDEX].str());
   }
 
-  version::version(const std::vector<unsigned int> versions,
-                   const std::string prerelease,
-                   const std::string metadata) :
+  version::version(std::vector<unsigned int> versions,
+                   std::string prerelease,
+                   std::string metadata) :
     versions(std::move(versions)),
     prerelease(std::move(prerelease)),
     metadata(std::move(metadata))
   {
-    if (versions.size() < 2)
+    if (this->versions.size() < 2)
       throw std::invalid_argument("Version must contain at least two numbers.");
 
-    if (prerelease.size() > 0)
+    if (this->prerelease.size() > 0)
     {
-      match_prerelease(prerelease);
+      match_prerelease(this->prerelease);
       parse_prerelease();
     }
 
-    if (metadata.size() > 0)
+    if (this->metadata.size() > 0)
     {
-      match_metadata(metadata);
+      match_metadata(this->metadata);
     }
   }
 
