@@ -338,7 +338,7 @@ namespace semver
       {
         check_identifier(s);
 
-        prerelease_comp.push_back(prerelease_component(s));
+        prerelease_comp.emplace_back(s);
       });
   }
 
