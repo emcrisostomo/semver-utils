@@ -173,7 +173,7 @@ int check_versions(std::vector<std::string> version)
 {
   int ret = 0;
 
-  for (auto v : version)
+  for (const auto& v : version)
   {
     try
     {
@@ -193,7 +193,7 @@ std::vector<std::string> read_arguments(int argc, char **argv)
 {
   std::vector<std::string> arguments;
 
-  for (auto i = optind; i < argc; ++i) arguments.push_back(argv[i]);
+  for (auto i = optind; i < argc; ++i) arguments.emplace_back(argv[i]);
 
   // Read arguments from the standard input, if the program is not connected to
   // a terminal
