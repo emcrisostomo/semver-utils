@@ -21,10 +21,10 @@ static void parse_opts(int argc, char **argv);
 static std::vector<std::string> read_arguments(int argc, char **argv);
 static void usage(std::ostream& stream);
 
-static int bump_versions(std::vector<std::string> vers);
-static int check_versions(std::vector<std::string> vers);
-static int compare_versions(std::vector<std::string> vector);
-static int sort_versions(std::vector<std::string> vector);
+static int bump_versions(std::vector<std::string> version);
+static int check_versions(std::vector<std::string> version);
+static int compare_versions(std::vector<std::string> version);
+static int sort_versions(std::vector<std::string> version);
 
 int main(int argc, char **argv)
 {
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
   return 1;
 }
 
-int bump_versions(std::vector<std::string> args)
+int bump_versions(std::vector<std::string> version)
 {
   unsigned int index_to_bump;
 
@@ -93,7 +93,7 @@ int bump_versions(std::vector<std::string> args)
 
   int ret = 0;
 
-  for (auto& v : args)
+  for (auto& v : version)
   {
     try
     {
@@ -111,9 +111,9 @@ int bump_versions(std::vector<std::string> args)
   return ret;
 }
 
-int compare_versions(std::vector<std::string> vector)
+int compare_versions(std::vector<std::string> version)
 {
-  if (vector.size() != 2)
+  if (version.size() != 2)
   {
     std::cerr << _("Invalid number of arguments.\n");
     return 1;
@@ -122,9 +122,9 @@ int compare_versions(std::vector<std::string> vector)
   try
   {
     semver::version first =
-      semver::version::from_string(vector[0]).strip_metadata();
+      semver::version::from_string(version[0]).strip_metadata();
     semver::version second =
-      semver::version::from_string(vector[1]).strip_metadata();
+      semver::version::from_string(version[1]).strip_metadata();
 
     if (first == second) return 0;
     return first < second ? 1 : 2;
@@ -136,12 +136,12 @@ int compare_versions(std::vector<std::string> vector)
   }
 }
 
-int sort_versions(std::vector<std::string> args)
+int sort_versions(std::vector<std::string> version)
 {
   unsigned int ret = 0;
   std::vector<semver::version> versions;
 
-  for (auto& v : args)
+  for (auto& v : version)
   {
     try
     {
@@ -169,11 +169,11 @@ int sort_versions(std::vector<std::string> args)
   return ret;
 }
 
-int check_versions(std::vector<std::string> vers)
+int check_versions(std::vector<std::string> version)
 {
   int ret = 0;
 
-  for (auto v : vers)
+  for (auto v : version)
   {
     try
     {
