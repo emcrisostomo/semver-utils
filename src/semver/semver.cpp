@@ -66,18 +66,15 @@ int bump_versions(std::vector<std::string> args)
 {
   unsigned int index_to_bump;
 
-  if (component_to_bump.compare("M") == 0
-      || component_to_bump.compare("major") == 0)
+  if (component_to_bump == "M" || component_to_bump == "major")
   {
     index_to_bump = 0;
   }
-  else if (component_to_bump.compare("m") == 0
-           || component_to_bump.compare("minor") == 0)
+  else if (component_to_bump == "m" || component_to_bump == "minor")
   {
     index_to_bump = 1;
   }
-  else if (component_to_bump.compare("p") == 0
-           || component_to_bump.compare("patch") == 0)
+  else if (component_to_bump == "p" || component_to_bump == "patch")
   {
     index_to_bump = 2;
   }
@@ -101,8 +98,8 @@ int bump_versions(std::vector<std::string> args)
     try
     {
       std::cout
-      << semver::version::from_string(v).bump(index_to_bump).str()
-      << "\n";
+        << semver::version::from_string(v).bump(index_to_bump).str()
+        << "\n";
     }
     catch (std::invalid_argument& ex)
     {
