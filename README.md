@@ -186,7 +186,7 @@ Bug reports can be reported as issues on the [project home page][semver-utils].
 
 -----
 
-Copyright (c) 2016 Enrico M. Crisostomo
+Copyright (c) 2016-2017 Enrico M. Crisostomo
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
