@@ -98,6 +98,14 @@ set_tests_properties(semverRuns PROPERTIES WILL_FAIL true)
 add_test(semverHelp semver --help)
 set_tests_properties(semverHelp PROPERTIES PASS_REGULAR_EXPRESSION "${PACKAGE} ${PACKAGE_VERSION}")
 
+add_test(semverValidateSucceeds semver -v 1.2.3 7.8.9-rc0)
+
+add_test(semverValidateFailsVersionTooShort semver -v 1)
+set_tests_properties(semverValidateFailsVersionTooShort PROPERTIES WILL_FAIL true)
+
+add_test(semverValidateFailsVersionInvalid semver -v 1.a.0)
+set_tests_properties(semverValidateFailsVersionInvalid PROPERTIES WILL_FAIL true)
+
 add_test(semverBumpMajor semver -b major 1.0.0)
 set_tests_properties(semverBumpMajor PROPERTIES PASS_REGULAR_EXPRESSION "2\\.0\\.0")
 
@@ -111,4 +119,4 @@ add_test(semverBumpCoordinate semver -b 10 1.2.3)
 set_tests_properties(semverBumpCoordinate PROPERTIES PASS_REGULAR_EXPRESSION "1\\.2\\.3\\.0\\.0\\.0\\.0\\.0\\.0\\.0\\.1")
 
 add_test(semverCompare semver -c 1.2.3 7.8.9)
-set_tests_properties(semverRuns PROPERTIES WILL_FAIL true)
+set_tests_properties(semverCompare PROPERTIES WILL_FAIL true)
