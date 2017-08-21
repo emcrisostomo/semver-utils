@@ -15,21 +15,24 @@ set(LOCALEDIR         "${CMAKE_INSTALL_PREFIX}/share/locale" CACHE FILEPATH "loc
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(LIBSEMVER_SOURCE_FILES
-        src/libsemver/c/errors.h
-        src/libsemver/c/libsemver.cpp
-        src/libsemver/c/libsemver.h
+set(LIBSEMVER_HEADER_FILES
         src/libsemver/gettext.h
         src/libsemver/gettext_defs.h
-        src/libsemver/c++/version.cpp
+        src/libsemver/c/errors.h
+        src/libsemver/c/libsemver.h
         src/libsemver/c++/version.hpp)
+
+set(LIBSEMVER_SOURCE_FILES
+        ${LIBSEMVER_HEADER_FILES}
+        src/libsemver/c/libsemver.cpp
+        src/libsemver/c++/version.cpp)
+
 add_library(libsemver ${LIBSEMVER_SOURCE_FILES})
 set_target_properties(libsemver PROPERTIES OUTPUT_NAME semver)
 target_include_directories(libsemver PUBLIC src)
 
 set(SEMVER_SOURCE_FILES
-        src/semver/semver.cpp
-        libsemver_config.h)
+        src/semver/semver.cpp)
 
 add_executable(semver ${SEMVER_SOURCE_FILES})
 target_link_libraries(semver libsemver)
@@ -84,5 +87,4 @@ check_include_file_cxx(libsemver_config.h HAVE_CONFIG_H)
 # install targets
 install(TARGETS libsemver DESTINATION lib)
 install(TARGETS semver DESTINATION bin)
-install(FILES ${PROJECT_BINARY_DIR}/cmake_config.h DESTINATION include)
-# TODO: install headers
+install(FILES ${LIBSEMVER_HEADER_FILES} DESTINATION include/libsemver)
