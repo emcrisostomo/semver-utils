@@ -30,7 +30,49 @@ set(SEMVER_SOURCE_FILES
         src/semver/semver.cpp
         libsemver_config.h)
 
-add_definitions(-DLOCALEDIR)
+add_executable(semver ${SEMVER_SOURCE_FILES})
+target_link_libraries(semver libsemver)
 
-add_executable(semver-utils ${SEMVER_SOURCE_FILES})
-target_link_libraries (semver-utils libsemver)
+# include modules
+include(FindGettext)
+include(FindIntl)
+include(CheckIncludeFileCXX)
+include(CheckSymbolExists)
+
+include_directories("${PROJECT_BINARY_DIR}")
+include_directories("${Intl_INCLUDE_DIRS}")
+
+# check for gettext and libintl
+check_include_file_cxx(getopt.h HAVE_GETOPT_H)
+
+if (HAVE_GETOPT_H)
+    check_symbol_exists(getopt_long getopt.h HAVE_GETOPT_LONG)
+endif (HAVE_GETOPT_H)
+
+# If both gettext and libintl are found, define the USE_NLS variable to
+# optionally disable them
+if (Intl_FOUND AND GETTEXT_FOUND)
+    option(USE_NLS "Use NLS" ON)
+endif ()
+
+if (USE_NLS)
+    set(ENABLE_NLS 1)
+
+    if (Intl_LIBRARIES)
+        target_link_libraries(semver ${Intl_LIBRARIES})
+    endif ()
+
+    # gettext configuration
+    set(LINGUAS en en@quot en@boldquot it es)
+
+    foreach (language ${LINGUAS})
+        configure_file(${PROJECT_SOURCE_DIR}/po/${language}.po ${PROJECT_BINARY_DIR}/${language}.po COPYONLY)
+    endforeach ()
+
+    gettext_process_pot_file(po/${PACKAGE}.pot ALL INSTALL_DESTINATION share/locale LANGUAGES ${LINGUAS})
+endif ()
+
+# Add a configuration file processed by cmake
+configure_file(${PROJECT_SOURCE_DIR}/cmake_config.h.in ${PROJECT_BINARY_DIR}/cmake_config.h)
+add_definitions(-DHAVE_CMAKE_CONFIG_H)
+check_include_file_cxx(libsemver_config.h HAVE_CONFIG_H)
