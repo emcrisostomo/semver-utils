@@ -88,3 +88,24 @@ check_include_file_cxx(libsemver_config.h HAVE_CONFIG_H)
 install(TARGETS libsemver DESTINATION lib)
 install(TARGETS semver DESTINATION bin)
 install(FILES ${LIBSEMVER_HEADER_FILES} DESTINATION include/libsemver)
+
+# tests
+include(CTest)
+
+add_test(semverRuns semver)
+set_tests_properties(semverRuns PROPERTIES WILL_FAIL true)
+
+add_test(semverHelp semver --help)
+set_tests_properties(semverHelp PROPERTIES PASS_REGULAR_EXPRESSION "${PACKAGE} ${PACKAGE_VERSION}")
+
+add_test(semverBumpMajor semver -b major 1.0.0)
+set_tests_properties(semverBumpMajor PROPERTIES PASS_REGULAR_EXPRESSION "2\\.0\\.0")
+
+add_test(semverBumpMinor semver -b minor 1.0.0)
+set_tests_properties(semverBumpMinor PROPERTIES PASS_REGULAR_EXPRESSION "1\\.1\\.0")
+
+add_test(semverBumpPatch semver -b patch 1.0.0)
+set_tests_properties(semverBumpPatch PROPERTIES PASS_REGULAR_EXPRESSION "1\\.0\\.1")
+
+add_test(semverBumpCoordinate semver -b 10 1.2.3)
+set_tests_properties(semverBumpCoordinate PROPERTIES PASS_REGULAR_EXPRESSION "1\\.2\\.3\\.0\\.0\\.0\\.0\\.0\\.0\\.0\\.1")
