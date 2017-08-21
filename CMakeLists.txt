@@ -24,6 +24,7 @@ set(LIBSEMVER_SOURCE_FILES
         src/libsemver/c++/version.cpp
         src/libsemver/c++/version.hpp)
 add_library(libsemver ${LIBSEMVER_SOURCE_FILES})
+set_target_properties(libsemver PROPERTIES OUTPUT_NAME semver)
 target_include_directories(libsemver PUBLIC src)
 
 set(SEMVER_SOURCE_FILES
@@ -84,3 +85,4 @@ check_include_file_cxx(libsemver_config.h HAVE_CONFIG_H)
 install(TARGETS libsemver DESTINATION lib)
 install(TARGETS semver DESTINATION bin)
 install(FILES ${PROJECT_BINARY_DIR}/cmake_config.h DESTINATION include)
+# TODO: install headers
