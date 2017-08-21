@@ -61,8 +61,6 @@ remove-potcdate.sed
 POTFILES
 
 # Automatically generated PO and GMO files
-en@boldquot.po
-en@quot.po
 *.gmo
 
 # M4 macros required by gettext and added by autopoint
