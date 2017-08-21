@@ -20,7 +20,12 @@
 #include <unistd.h> // isatty()
 #include <cstdio> // fileno()
 #include <vector>
-#include "../../libsemver_config.h"
+#ifdef HAVE_CONFIG_H
+#  include "libsemver_config.h"
+#endif
+#ifdef HAVE_CMAKE_CONFIG_H
+#  include "cmake_config.h"
+#endif
 #include "libsemver/gettext.h"
 #include "libsemver/gettext_defs.h"
 #include "libsemver/c++/version.hpp"
