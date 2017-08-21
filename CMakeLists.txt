@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(semver-utils)
+project(semver-utils VERSION 1.2.0)
 
 #@formatter:off
 set(PACKAGE           "semver-utils")
@@ -120,3 +120,17 @@ set_tests_properties(semverBumpCoordinate PROPERTIES PASS_REGULAR_EXPRESSION "1\
 
 add_test(semverCompare semver -c 1.2.3 7.8.9)
 set_tests_properties(semverCompare PROPERTIES WILL_FAIL true)
+
+# installer
+include(InstallRequiredSystemLibraries)
+#@formatter:off
+# Remove and default to project description when migrated to CMake 3.9
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A C/C++ library and an utility to compare and manipulate versions numbers complying with Semantic Versioning 2.0.0")
+set(CPACK_PACKAGE_VERSION_MAJOR       "${PROJECT_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR       "${PROJECT_VERSION_MINOR}")
+set(CPACK_PACKAGE_VERSION_PATCH       "${PROJECT_VERSION_PATCH}")
+set(CPACK_PACKAGE_VENDOR              "${PACKAGE_AUTHOR}")
+set(CPACK_RESOURCE_FILE_LICENSE       "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+set(CPACK_GENERATOR                   "STGZ;TGZ")
+#@formatter:on
+include(CPack)
