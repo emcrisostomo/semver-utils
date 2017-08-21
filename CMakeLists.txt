@@ -33,6 +33,9 @@ set(SEMVER_SOURCE_FILES
 add_executable(semver ${SEMVER_SOURCE_FILES})
 target_link_libraries(semver libsemver)
 
+# Add option to choose between shared and static libraries
+option(BUILD_SHARED_LIBS "Build shared libraries" ON)
+
 # include modules
 include(FindGettext)
 include(FindIntl)
@@ -76,3 +79,8 @@ endif ()
 configure_file(${PROJECT_SOURCE_DIR}/cmake_config.h.in ${PROJECT_BINARY_DIR}/cmake_config.h)
 add_definitions(-DHAVE_CMAKE_CONFIG_H)
 check_include_file_cxx(libsemver_config.h HAVE_CONFIG_H)
+
+# install targets
+install(TARGETS libsemver DESTINATION lib)
+install(TARGETS semver DESTINATION bin)
+install(FILES ${PROJECT_BINARY_DIR}/cmake_config.h DESTINATION include)
