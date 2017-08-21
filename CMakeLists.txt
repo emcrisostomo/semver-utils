@@ -109,3 +109,6 @@ set_tests_properties(semverBumpPatch PROPERTIES PASS_REGULAR_EXPRESSION "1\\.0\\
 
 add_test(semverBumpCoordinate semver -b 10 1.2.3)
 set_tests_properties(semverBumpCoordinate PROPERTIES PASS_REGULAR_EXPRESSION "1\\.2\\.3\\.0\\.0\\.0\\.0\\.0\\.0\\.0\\.1")
+
+add_test(semverCompare semver -c 1.2.3 7.8.9)
+set_tests_properties(semverRuns PROPERTIES WILL_FAIL true)
