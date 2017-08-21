@@ -1,0 +1,152 @@
+# English translations for semver-utils package.
+# Copyright (C) 2017 Enrico M. Crisostomo
+# This file is distributed under the same license as the semver-utils package.
+# Automatically generated, 2017.
+#
+# All this catalog "translates" are quotation characters.
+# The msgids must be ASCII and therefore cannot contain real quotation
+# characters, only substitutes like grave accent (0x60), apostrophe (0x27)
+# and double quote (0x22). These substitutes look strange; see
+# http://www.cl.cam.ac.uk/~mgk25/ucs/quotes.html
+#
+# This catalog translates grave accent (0x60) and apostrophe (0x27) to
+# left single quotation mark (U+2018) and right single quotation mark (U+2019).
+# It also translates pairs of apostrophe (0x27) to
+# left single quotation mark (U+2018) and right single quotation mark (U+2019)
+# and pairs of quotation mark (0x22) to
+# left double quotation mark (U+201C) and right double quotation mark (U+201D).
+#
+# When output to an UTF-8 terminal, the quotation characters appear perfectly.
+# When output to an ISO-8859-1 terminal, the single quotation marks are
+# transliterated to apostrophes (by iconv in glibc 2.2 or newer) or to
+# grave/acute accent (by libiconv), and the double quotation marks are
+# transliterated to 0x22.
+# When output to an ASCII terminal, the single quotation marks are
+# transliterated to apostrophes, and the double quotation marks are
+# transliterated to 0x22.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: semver-utils 1.2.0-develop\n"
+"Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
+"POT-Creation-Date: 2017-08-21 12:23+0200\n"
+"PO-Revision-Date: 2017-08-21 12:23+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en@quot\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/libsemver/c++/version.cpp:157
+msgid "Invalid version: "
+msgstr "Invalid version: "
+
+#: src/libsemver/c++/version.cpp:348
+msgid "Invalid identifier: "
+msgstr "Invalid identifier: "
+
+#: src/libsemver/c++/version.cpp:358
+msgid "Numerical identifier cannot contain leading zeroes."
+msgstr "Numerical identifier cannot contain leading zeroes."
+
+#: src/libsemver/c++/version.cpp:364
+msgid "Invalid prerelease: "
+msgstr "Invalid prerelease: "
+
+#: src/libsemver/c++/version.cpp:370
+msgid "Invalid metadata: "
+msgstr "Invalid metadata: "
+
+#: src/semver/semver.cpp:61
+msgid "No command has been specified.\n"
+msgstr "No command has been specified.\n"
+
+#: src/semver/semver.cpp:71 src/semver/semver.cpp:138
+msgid "Invalid number of arguments.\n"
+msgstr "Invalid number of arguments.\n"
+
+#: src/semver/semver.cpp:80
+msgid "No operation was requested. This is a bug.\n"
+msgstr "No operation was requested. This is a bug.\n"
+
+#: src/semver/semver.cpp:109
+msgid "Invalid version index: "
+msgstr "Invalid version index: "
+
+#: src/semver/semver.cpp:301
+msgid "-r can only be used with -s.\n"
+msgstr "-r can only be used with -s.\n"
+
+#: src/semver/semver.cpp:312
+msgid ""
+"License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl."
+"html>.\n"
+msgstr ""
+"License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl."
+"html>.\n"
+
+#: src/semver/semver.cpp:314
+msgid "This is free software: you are free to change and redistribute it.\n"
+msgstr "This is free software: you are free to change and redistribute it.\n"
+
+#: src/semver/semver.cpp:315
+msgid "There is NO WARRANTY, to the extent permitted by law.\n"
+msgstr "There is NO WARRANTY, to the extent permitted by law.\n"
+
+#: src/semver/semver.cpp:317
+msgid "Written by Enrico M. Crisostomo."
+msgstr "Written by Enrico M. Crisostomo."
+
+#: src/semver/semver.cpp:324
+msgid "Usage:\n"
+msgstr "Usage:\n"
+
+#: src/semver/semver.cpp:325
+msgid " (option)+ (version)+ \n"
+msgstr " (option)+ (version)+ \n"
+
+#: src/semver/semver.cpp:327
+msgid "Options:\n"
+msgstr "Options:\n"
+
+#: src/semver/semver.cpp:328
+msgid "Increment the specified version component.\n"
+msgstr "Increment the specified version component.\n"
+
+#: src/semver/semver.cpp:329
+msgid "Compare two versions.\n"
+msgstr "Compare two versions.\n"
+
+#: src/semver/semver.cpp:330
+msgid "Show this message.\n"
+msgstr "Show this message.\n"
+
+#: src/semver/semver.cpp:331
+msgid "Reverse the sort order.\n"
+msgstr "Reverse the sort order.\n"
+
+#: src/semver/semver.cpp:332
+msgid "Sort the versions.\n"
+msgstr "Sort the versions.\n"
+
+#: src/semver/semver.cpp:333
+msgid "Validate a version.\n"
+msgstr "Validate a version.\n"
+
+#: src/semver/semver.cpp:335
+msgid ""
+"See the man page for more information.\n"
+"\n"
+msgstr ""
+"See the man page for more information.\n"
+"\n"
+
+#: src/semver/semver.cpp:336
+msgid "Report bugs to <"
+msgstr "Report bugs to <"
+
+#: src/semver/semver.cpp:337
+msgid "Project home page: <"
+msgstr "Project home page: <"

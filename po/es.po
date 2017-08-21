@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: semver-utils 1.1.0-develop\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2017-07-27 15:48+0200\n"
+"POT-Creation-Date: 2017-08-21 12:23+0200\n"
 "PO-Revision-Date: 2016-05-02 12:48+0200\n"
 "Last-Translator: Enrico Maria Crisostomo <enrico.m.crisostomo@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -37,63 +37,81 @@ msgstr "Prerelease inválida: "
 msgid "Invalid metadata: "
 msgstr "Metadatos inválidos: "
 
-#: src/semver/semver.cpp:57
+#: src/semver/semver.cpp:61
 msgid "No command has been specified.\n"
 msgstr "Ningún comando has sido especificado.\n"
 
-#: src/semver/semver.cpp:67 src/semver/semver.cpp:134
+#: src/semver/semver.cpp:71 src/semver/semver.cpp:138
 msgid "Invalid number of arguments.\n"
 msgstr "Número de argumentos inválido.\n"
 
-#: src/semver/semver.cpp:76
+#: src/semver/semver.cpp:80
 msgid "No operation was requested. This is a bug.\n"
 msgstr "Ninguna operación ha sido solicitada. Este es un bug.\n"
 
-#: src/semver/semver.cpp:105
+#: src/semver/semver.cpp:109
 msgid "Invalid version index: "
 msgstr "Índice de versión inválido: "
 
-#: src/semver/semver.cpp:292
+#: src/semver/semver.cpp:301
 msgid "-r can only be used with -s.\n"
 msgstr "-r puede usarse sólo con -s.\n"
 
-#: src/semver/semver.cpp:300
+#: src/semver/semver.cpp:312
+msgid ""
+"License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl."
+"html>.\n"
+msgstr ""
+
+#: src/semver/semver.cpp:314
+msgid "This is free software: you are free to change and redistribute it.\n"
+msgstr ""
+
+#: src/semver/semver.cpp:315
+msgid "There is NO WARRANTY, to the extent permitted by law.\n"
+msgstr ""
+
+#: src/semver/semver.cpp:317
+msgid "Written by Enrico M. Crisostomo."
+msgstr ""
+
+#: src/semver/semver.cpp:324
 msgid "Usage:\n"
 msgstr "Uso:\n"
 
-#: src/semver/semver.cpp:301
+#: src/semver/semver.cpp:325
 msgid " (option)+ (version)+ \n"
 msgstr " (opción)+ (versión)+ \n"
 
-#: src/semver/semver.cpp:303
+#: src/semver/semver.cpp:327
 msgid "Options:\n"
 msgstr "Opciones:\n"
 
-#: src/semver/semver.cpp:304
+#: src/semver/semver.cpp:328
 msgid "Increment the specified version component.\n"
 msgstr "Incrementa el componente de versión especificado.\n"
 
-#: src/semver/semver.cpp:305
+#: src/semver/semver.cpp:329
 msgid "Compare two versions.\n"
 msgstr "Compara dos versiones.\n"
 
-#: src/semver/semver.cpp:306
+#: src/semver/semver.cpp:330
 msgid "Show this message.\n"
 msgstr "Muestra este mensaje.\n"
 
-#: src/semver/semver.cpp:307
+#: src/semver/semver.cpp:331
 msgid "Reverse the sort order.\n"
 msgstr "Invierte el órden de clasificación.\n"
 
-#: src/semver/semver.cpp:308
+#: src/semver/semver.cpp:332
 msgid "Sort the versions.\n"
 msgstr "Ordena las versiones.\n"
 
-#: src/semver/semver.cpp:309
+#: src/semver/semver.cpp:333
 msgid "Validate a version.\n"
 msgstr "Valida una versión.\n"
 
-#: src/semver/semver.cpp:311
+#: src/semver/semver.cpp:335
 msgid ""
 "See the man page for more information.\n"
 "\n"
@@ -101,10 +119,10 @@ msgstr ""
 "Consulta a la página man para más informaciones.\n"
 "\n"
 
-#: src/semver/semver.cpp:312
+#: src/semver/semver.cpp:336
 msgid "Report bugs to <"
 msgstr "Envía los reportes de bugs a <"
 
-#: src/semver/semver.cpp:313
+#: src/semver/semver.cpp:337
 msgid "Project home page: <"
 msgstr "Home page del proyecto: <"
