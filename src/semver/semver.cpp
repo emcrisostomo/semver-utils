@@ -34,8 +34,10 @@ static const int OPT_VERSION = 128;
 static const int SEMVER_EXIT_OK = 0;
 
 static bool command_set = false;
+static bool Mflag = false;
 static bool bflag = false;
 static bool cflag = false;
+static bool mflag = false;
 static bool rflag = false;
 static bool sflag = false;
 static bool vflag = false;
@@ -45,9 +47,11 @@ static void parse_opts(int argc, char **argv);
 static std::vector<std::string> read_arguments(int argc, char **argv);
 static void usage(std::ostream& stream);
 
+static int max_version(const std::vector<std::string>& version);
 static int bump_versions(const std::vector<std::string>& version);
 static int check_versions(const std::vector<std::string>& version);
 static int compare_versions(const std::vector<std::string>& version);
+static int min_version(const std::vector<std::string>& version);
 static int sort_versions(const std::vector<std::string>& version);
 static void print_version();
 
@@ -77,14 +81,66 @@ int main(int argc, char **argv)
     exit(1);
   }
 
+  if (Mflag) return max_version(args);
   if (bflag) return bump_versions(args);
   if (cflag) return compare_versions(args);
+  if (mflag) return min_version(args);
   if (sflag) return sort_versions(args);
   if (vflag) return check_versions(args);
 
   std::cerr << _("No operation was requested. This is a bug.\n");
 
   return 1;
+}
+
+int max_version(const std::vector<std::string>& version)
+{
+  int ret = 0;
+  std::vector<semver::version> versions;
+
+  for (auto& v : version)
+  {
+    try
+    {
+      versions.push_back(semver::version::from_string(v));
+    }
+    catch (std::invalid_argument& ex)
+    {
+      std::cerr << ex.what() << "\n";
+      ret = 1;
+    }
+  }
+
+  std::cout
+    << (*std::max_element(std::begin(versions), std::end(versions))).str()
+    << "\n";
+
+  return ret;
+}
+
+int min_version(const std::vector<std::string>& version)
+{
+  int ret = 0;
+  std::vector<semver::version> versions;
+
+  for (auto& v : version)
+  {
+    try
+    {
+      versions.push_back(semver::version::from_string(v));
+    }
+    catch (std::invalid_argument& ex)
+    {
+      std::cerr << ex.what() << "\n";
+      ret = 1;
+    }
+  }
+
+  std::cout
+    << (*std::min_element(std::begin(versions), std::end(versions))).str()
+    << "\n";
+
+  return ret;
 }
 
 int bump_versions(const std::vector<std::string>& version)
@@ -163,7 +219,7 @@ int compare_versions(const std::vector<std::string>& version)
 
 int sort_versions(const std::vector<std::string>& version)
 {
-  unsigned int ret = 0;
+  int ret = 0;
   std::vector<semver::version> versions;
 
   for (auto& v : version)
@@ -237,13 +293,15 @@ std::vector<std::string> read_arguments(int argc, char **argv)
 void parse_opts(int argc, char **argv)
 {
   int ch;
-  std::string short_options = "b:chrsv";
+  std::string short_options = "Mb:chmrsv";
 
   int option_index = 0;
   static struct option long_options[] = {
     {"bump",     required_argument, nullptr, 'b'},
     {"compare",  no_argument,       nullptr, 'c'},
     {"help",     no_argument,       nullptr, 'h'},
+    {"max",      no_argument,       nullptr, 'M'},
+    {"min",      no_argument,       nullptr, 'm'},
     {"reverse",  no_argument,       nullptr, 'r'},
     {"sort",     no_argument,       nullptr, 's'},
     {"validate", no_argument,       nullptr, 'v'},
@@ -259,6 +317,11 @@ void parse_opts(int argc, char **argv)
   {
     switch (ch)
     {
+    case 'M':
+      command_set = true;
+      Mflag = true;
+      break;
+
     case 'b':
       command_set = true;
       bflag = true;
@@ -273,6 +336,11 @@ void parse_opts(int argc, char **argv)
     case 'h':
       usage(std::cout);
       exit(0);
+
+    case 'm':
+      command_set = true;
+      mflag = true;
+      break;
 
     case 'r':
       rflag = true;
