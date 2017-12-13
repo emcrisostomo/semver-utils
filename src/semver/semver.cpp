@@ -398,9 +398,11 @@ void usage(std::ostream& stream)
   stream << "semver" << _(" (option)+ (version)+ \n");
   stream << "\n";
   stream << _("Options:\n");
+  stream << " -M, --max             " << _("Find the maximum version.\n");
   stream << " -b, --bump component  " << _("Increment the specified version component.\n");
   stream << " -c, --compare         " << _("Compare two versions.\n");
   stream << " -h, --help            " << _("Show this message.\n");
+  stream << " -m, --min             " << _("Find the minimum version.\n");
   stream << " -r, --reverse         " << _("Reverse the sort order.\n");
   stream << " -s, --sort            " << _("Sort the versions.\n");
   stream << " -v, --validate        " << _("Validate a version.\n");
