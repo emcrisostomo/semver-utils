@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.8)
-project(semver-utils VERSION 1.2.0)
+cmake_minimum_required(VERSION 3.9)
+project(semver-utils VERSION 1.2.0 LANGUAGES C CXX)
 
 #@formatter:off
 set(PACKAGE           "semver-utils")
