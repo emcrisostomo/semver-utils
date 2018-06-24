@@ -29,12 +29,17 @@ set(LIBSEMVER_SOURCE_FILES
 
 add_library(libsemver ${LIBSEMVER_SOURCE_FILES})
 set_target_properties(libsemver PROPERTIES OUTPUT_NAME semver)
-target_include_directories(libsemver PUBLIC src)
+target_include_directories(libsemver
+        PUBLIC
+        src
+        PRIVATE
+        ${PROJECT_BINARY_DIR})
 
 set(SEMVER_SOURCE_FILES
         src/semver/semver.cpp)
 
 add_executable(semver ${SEMVER_SOURCE_FILES})
+target_include_directories(semver PRIVATE ${PROJECT_BINARY_DIR})
 target_link_libraries(semver libsemver)
 
 # Add option to choose between shared and static libraries
@@ -46,8 +51,8 @@ include(FindIntl)
 include(CheckIncludeFileCXX)
 include(CheckSymbolExists)
 
-include_directories("${PROJECT_BINARY_DIR}")
-include_directories("${Intl_INCLUDE_DIRS}")
+target_include_directories(libsemver PUBLIC ${Intl_INCLUDE_DIRS})
+target_include_directories(semver PUBLIC ${Intl_INCLUDE_DIRS})
 
 # check for gettext and libintl
 check_include_file_cxx(getopt.h HAVE_GETOPT_H)
