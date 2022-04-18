@@ -29,6 +29,7 @@
 #include <exception>
 #include <cstdlib>
 #include <memory>
+#include <stdexcept>
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
