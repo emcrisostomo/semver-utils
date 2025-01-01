@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2017 Enrico M. Crisostomo
+ * Copyright (c) 2016-2024 Enrico M. Crisostomo
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -307,7 +307,7 @@ namespace semver
     return versions[index];
   }
 
-  std::vector<unsigned int> parse_version(const std::string& v)
+  static std::vector<unsigned int> parse_version(const std::string& v)
   {
     std::regex numbers("\\d+");
     std::sregex_token_iterator first(v.begin(), v.end(), numbers);
@@ -317,7 +317,7 @@ namespace semver
     std::for_each(
       first,
       last,
-      [&results](std::string s)
+      [&results](const std::string& s)
       {
         results.push_back((unsigned int) std::stoul(s));
       });
@@ -342,7 +342,7 @@ namespace semver
       });
   }
 
-  void check_identifier(const std::string& s)
+  static void check_identifier(const std::string& s)
   {
     if (s.empty())
       throw std::invalid_argument(_("Invalid identifier: ") + s);
@@ -358,13 +358,13 @@ namespace semver
       _("Numerical identifier cannot contain leading zeroes."));
   }
 
-  void match_prerelease(const std::string& s)
+  static void match_prerelease(const std::string& s)
   {
     if (!std::regex_match(s, std::regex(PRERELEASE_PATTERN)))
       throw std::invalid_argument(_("Invalid prerelease: ") + s);
   }
 
-  void match_metadata(const std::string& s)
+  static void match_metadata(const std::string& s)
   {
     if (!std::regex_match(s, std::regex(METADATA_PATTERN)))
       throw std::invalid_argument(_("Invalid metadata: ") + s);
