@@ -102,3 +102,6 @@ libsemver_config.h.in
 .idea/dataSources.*
 .idea/dictionaries
 out/
+
+# VS Code
+.vscode/
