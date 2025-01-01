@@ -1,6 +1,6 @@
 #                                               -*- Autoconf -*-
 #
-# Copyright (c) 2016 Enrico M. Crisostomo
+# Copyright (c) 2016-2024 Enrico M. Crisostomo
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -16,11 +16,11 @@
 #
 # Process this file with autoconf to produce a configure script.
 #
-dnl Copyright (C) 2016 Enrico M. Crisostomo
+dnl Copyright (C) 2016-2024 Enrico M. Crisostomo
 AC_PREREQ([2.69])
 m4_include([m4/libsemver_version.m4])
 AC_INIT([semver-utils], [LIBSEMVER_VERSION], [enrico.m.crisostomo@gmail.com], [], [https://github.com/emcrisostomo/semver-utils])
-AC_COPYRIGHT([2016 (C) Enrico M. Crisostomo])
+AC_COPYRIGHT([2016-2024 (C) Enrico M. Crisostomo])
 AC_REVISION([$Revision: LIBSEMVER_REVISION$])
 AC_CONFIG_SRCDIR([src/libsemver/c/libsemver.cpp])
 AC_CONFIG_AUX_DIR([config])
@@ -31,7 +31,6 @@ AC_CONFIG_FILES([src/semver/Makefile])
 AC_CONFIG_FILES([po/Makefile.in])
 AC_CONFIG_FILES([doc/doxygen/Makefile])
 AC_CONFIG_MACRO_DIRS([m4])
-AC_CONFIG_MACRO_DIR([m4])
 
 # Compute the canonical target-system type variables
 AC_CANONICAL_TARGET
@@ -42,19 +41,18 @@ AC_SUBST([TARGET_OS])
 AM_CONDITIONAL([OS_CYGWIN], [test "${target_os}" = "cygwin"])
 
 # Initialize Automake
-AM_INIT_AUTOMAKE([-Wall -Werror gnu subdir-objects 1.14.1])
+AM_INIT_AUTOMAKE([-Wall -Werror gnu subdir-objects 1.16.5])
 AM_SILENT_RULES([yes])
 AM_PROG_AR
 
 # Initialize libtool
-LT_PREREQ([2.4.2])
+LT_PREREQ([2.4.6])
 LT_INIT
 AC_SUBST([LIBTOOL_DEPS])
 
 # Initialize gettext
 AM_GNU_GETTEXT([external])
-AM_GNU_GETTEXT_VERSION([0.19.4])
-
+AM_GNU_GETTEXT_VERSION([0.21])
 
 # Configure language
 AC_LANG(C++)
@@ -69,7 +67,7 @@ AM_CONDITIONAL([HAVE_DOXYGEN], [test -n "${DOXYGEN}"])
 AM_COND_IF([HAVE_DOXYGEN], [AC_CONFIG_FILES([doc/doxygen/Doxyfile])])
 
 # Configure C++ compiler
-AX_CXX_COMPILE_STDCXX_11
+AX_CXX_COMPILE_STDCXX([11], [noext], [mandatory])
 AX_CXXFLAGS_WARN_ALL
 
 # Set library interface version

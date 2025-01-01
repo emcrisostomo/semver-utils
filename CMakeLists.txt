@@ -1,4 +1,19 @@
-cmake_minimum_required(VERSION 3.9)
+#
+# Copyright (c) 2016-2024 Enrico M. Crisostomo
+#
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation; either version 3, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+# details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+cmake_minimum_required(VERSION 3.14)
 project(semver-utils VERSION 1.2.0 LANGUAGES C CXX)
 
 #@formatter:off
@@ -14,6 +29,8 @@ set(LOCALEDIR         "${CMAKE_INSTALL_PREFIX}/share/locale" CACHE FILEPATH "loc
 #@formatter:on
 
 set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(LIBSEMVER_HEADER_FILES
         src/libsemver/gettext.h
