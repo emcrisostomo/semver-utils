@@ -8,6 +8,8 @@ semver
 *.lo
 *.o
 cmake-build-debug/
+build/
+dist/
 
 # Distribution files
 *.tar.gz
