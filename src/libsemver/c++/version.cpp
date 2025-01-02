@@ -117,13 +117,16 @@ namespace semver
 
   version version::from_string(std::string v)
   {
+    // Moving the input parameter in order not to change the API interface
+    // and be efficient.  Be careful _not_ to use the input parameter after
+    // this point.
     const std::string version = std::move(v);
 
     const std::string semver_ecma = "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$";
     std::regex semver_ecma_regexp(semver_ecma, std::regex_constants::ECMAScript);
     std::smatch ecma_fragments;
-    if (!std::regex_match(v, ecma_fragments, semver_ecma_regexp))
-      throw std::invalid_argument(_("Invalid version: ") + v);
+    if (!std::regex_match(version, ecma_fragments, semver_ecma_regexp))
+      throw std::invalid_argument(_("Invalid version: ") + version);
 
     return semver::version(
             static_cast<unsigned int>(std::stoul(ecma_fragments[1])),
