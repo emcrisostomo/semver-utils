@@ -185,7 +185,11 @@ const char *semver_get_version(semver_t *ver, unsigned int index)
   {
     auto version = static_cast<semver::version *>(ver->ptr);
 
-    return version->get_version(index).c_str();
+    std::string version_str = version->get_version(index);
+    char *c_str = (char *)malloc(sizeof(char) * (version_str.size() + 1));
+    if (!c_str) throw std::bad_alloc();
+    std::strcpy(c_str, version_str.c_str());
+    return c_str;
   }
   catch (std::bad_alloc& ex)
   {
