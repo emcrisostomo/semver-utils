@@ -183,6 +183,15 @@ namespace semver
     }
   }
 
+  version::version(unsigned int major,
+                   unsigned int minor,
+                   unsigned int patch,
+                   std::string prerelease,
+                   std::string metadata) :
+    version(std::vector<unsigned int>{major, minor, patch}, std::move(prerelease), std::move(metadata))
+  {
+  }
+
   std::string version::str() const
   {
     std::string out = std::to_string(versions[0]);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2017 Enrico M. Crisostomo
+ * Copyright (c) 2016-2024 Enrico M. Crisostomo
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -20,10 +20,10 @@
  * This header defines the semver::version class, the central type of the C++
  * API of `libsemver` library.
  *
- * @copyright Copyright (c) 2016 Enrico M. Crisostomo
+ * @copyright Copyright (c) 2016-2024 Enrico M. Crisostomo
  * @license GNU General Public License v. 3.0
  * @author Enrico M. Crisostomo
- * @version 1.0.0
+ * @version 1.1.0
  */
 #ifndef SEMVER_UTILS_VERSION_H
 #define SEMVER_UTILS_VERSION_H
@@ -119,6 +119,25 @@ namespace semver
      * _Semantic Versioning 2.0.0_.
      */
     version(std::vector<unsigned int> versions,
+            std::string prerelease = "",
+            std::string metadata = "");
+
+    /**
+     * @brief Constructs a semver::version instance with the specified
+     * parameters.  The parameters must comply with _Semantic Versioning 2.0.0_.
+     *
+     * @param major The major version.
+     * @param minor The minor version.
+     * @param patch The patch version.
+     * @param prerelease An optional prerelease string.
+     * @param metadata An optional metadata string.
+     * @return A semver::version instance.
+     * @throws std::invalid_argument if the parameters do not comply with
+     * _Semantic Versioning 2.0.0_.
+     */
+    version(unsigned int major,
+            unsigned int minor,
+            unsigned int patch,
             std::string prerelease = "",
             std::string metadata = "");
 
