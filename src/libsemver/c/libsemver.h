@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Enrico M. Crisostomo
+ * Copyright (c) 2016-2024 Enrico M. Crisostomo
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -19,10 +19,10 @@
  *
  * This header file defines the API of the `libsemver` library.
  *
- * @copyright Copyright (c) 2016 Enrico M. Crisostomo
+ * @copyright Copyright (c) 2016-2024 Enrico M. Crisostomo
  * @license GNU General Public License v. 3.0
  * @author Enrico M. Crisostomo
- * @version 1.0.0
+ * @version 3.0.0
  */
 
 #ifndef LIBSEMVER_H
@@ -53,8 +53,8 @@ semver_t *semver_create(const unsigned int *c_vers,
 void semver_free(semver_t *ver);
 
 const char *semver_str(semver_t *ver);
-unsigned int *semver_get_versions(semver_t *ver);
-unsigned int semver_get_version(semver_t *ver, unsigned int index);
+const char * const *semver_get_versions(semver_t *ver);
+const char *semver_get_version(semver_t *ver, unsigned int index);
 const char *semver_get_prerelease(semver_t *ver);
 const char *semver_get_metadata(semver_t *ver);
 semver_t *semver_bump_major(semver_t *ver);
