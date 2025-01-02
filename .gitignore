@@ -9,6 +9,7 @@ doc/doxygen/latex/
 cmake-build-debug/
 build/
 dist/
+src/semver/semver
 
 # Distribution files
 *.tar.gz
@@ -65,6 +66,7 @@ POTFILES
 *.gmo
 
 # M4 macros required by gettext and added by autopoint
+m4/host-cpu-c-abi.m4
 codeset.m4
 extern-inline.m4
 fcntl-o.m4
