@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Enrico M. Crisostomo
+ * Copyright (c) 2016-2024 Enrico M. Crisostomo
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,10 +16,10 @@
 /**
  * @file
  * @brief Main `libsemver` source file.
- * @copyright Copyright (c) 2016 Enrico M. Crisostomo
+ * @copyright Copyright (c) 2016-2024 Enrico M. Crisostomo
  * @license GNU General Public License v. 3.0
  * @author Enrico M. Crisostomo
- * @version 1.0.0
+ * @version 3.0.0
  */
 
 #include "libsemver.h"
@@ -85,7 +85,7 @@ semver_t *semver_from_string(const char *str)
   }
 }
 
-semver_t *semver_create(const unsigned int *c_vers,
+semver_t *semver_create(const char **c_vers,
                         const unsigned long c_vers_num,
                         const char *prerelease,
                         const char *metadata)
@@ -96,7 +96,7 @@ semver_t *semver_create(const unsigned int *c_vers,
   {
     std::unique_ptr<semver::version> version(
       new semver::version(
-        std::vector<unsigned int>(c_vers, c_vers + c_vers_num),
+        std::vector<std::string>(c_vers, c_vers + c_vers_num),
         prerelease ? prerelease : "",
         metadata ? metadata : ""));
     semver_t *sv = new semver_t();
@@ -143,21 +143,29 @@ const char *semver_str(semver_t *ver)
   }
 }
 
-unsigned int *semver_get_versions(semver_t *ver)
+const char * const *copy_vector_to_c_array(const std::vector<std::string> &vec) {
+    auto c_array = (char **)malloc(vec.size() * sizeof(char *));
+    if (!c_array) throw std::bad_alloc();
+
+    for (size_t i = 0; i < vec.size(); ++i) {
+        c_array[i] = (char *)malloc((vec[i].size() + 1) * sizeof(char));
+        if (!c_array[i]) throw std::bad_alloc();
+        std::strcpy(c_array[i], vec[i].c_str());
+    }
+
+    return c_array;
+}
+
+const char * const *semver_get_versions(semver_t *ver)
 {
   semver_reset_last_error();
 
   try
   {
-    semver::version *version = static_cast<semver::version *>(ver->ptr);
-    std::vector<unsigned int> versions = version->get_version();
+    auto version = static_cast<semver::version *>(ver->ptr);
+    std::vector<std::string> versions = version->get_version();
 
-    unsigned int *c_vers =
-      (unsigned int *) malloc(sizeof(unsigned int) * versions.size());
-
-    if (!c_vers) throw std::bad_alloc();
-
-    std::copy(versions.begin(), versions.end(), c_vers);
+    auto c_vers = copy_vector_to_c_array(versions);
 
     return c_vers;
   }
@@ -168,20 +176,20 @@ unsigned int *semver_get_versions(semver_t *ver)
   }
 }
 
-unsigned int semver_get_version(semver_t *ver, unsigned int index)
+const char *semver_get_version(semver_t *ver, unsigned int index)
 {
   semver_reset_last_error();
 
   try
   {
-    semver::version *version = static_cast<semver::version *>(ver->ptr);
+    auto version = static_cast<semver::version *>(ver->ptr);
 
-    return version->get_version(index);
+    return version->get_version(index).c_str();
   }
   catch (std::bad_alloc& ex)
   {
     semver_set_last_error(SEMVER_EXIT_BAD_ALLOC);
-    return 0;
+    return nullptr;
   }
 }
 

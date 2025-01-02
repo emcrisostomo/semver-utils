@@ -23,7 +23,7 @@
  * @copyright Copyright (c) 2016-2024 Enrico M. Crisostomo
  * @license GNU General Public License v. 3.0
  * @author Enrico M. Crisostomo
- * @version 1.1.0
+ * @version 3.0.0
  */
 #ifndef SEMVER_UTILS_VERSION_H
 #define SEMVER_UTILS_VERSION_H
@@ -58,13 +58,6 @@ namespace semver
      */
     std::string identifier;
 
-    /**
-     * @brief The component numeric value.
-     *
-     * This field is meaningful only if the current component is a number.
-     */
-    unsigned long value_as_number;
-
   public:
     prerelease_component(std::string s);
     bool operator<(const prerelease_component& rh) const;
@@ -84,7 +77,7 @@ namespace semver
   class version
   {
   private:
-    std::vector<unsigned int> versions;
+    std::vector<std::string> versions;
     std::string prerelease;
     std::vector<prerelease_component> prerelease_comp;
     std::string metadata;
@@ -118,7 +111,7 @@ namespace semver
      * @throws std::invalid_argument if the parameters do not comply with
      * _Semantic Versioning 2.0.0_.
      */
-    version(std::vector<unsigned int> versions,
+    version(std::vector<std::string> versions,
             std::string prerelease = "",
             std::string metadata = "");
 
@@ -135,9 +128,9 @@ namespace semver
      * @throws std::invalid_argument if the parameters do not comply with
      * _Semantic Versioning 2.0.0_.
      */
-    version(unsigned int major,
-            unsigned int minor,
-            unsigned int patch,
+    version(std::string major,
+            std::string minor,
+            std::string patch,
             std::string prerelease = "",
             std::string metadata = "");
 
@@ -153,15 +146,15 @@ namespace semver
      *
      * @return The version components.
      */
-    std::vector<unsigned int> get_version() const;
+    const std::vector<std::string>& get_version() const;
 
     /**
      * @brief Gets the specified version component.
      *
-     * @return The specified version component, or 0 if the specified @p index
+     * @return The specified version component, or "0" if the specified @p index
      * does not exist.
      */
-    unsigned int get_version(unsigned int index) const;
+    std::string get_version(unsigned int index) const;
 
     /**
      * @brief Gets the prerelease string.
