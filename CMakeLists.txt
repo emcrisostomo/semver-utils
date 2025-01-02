@@ -114,6 +114,8 @@ install(FILES ${LIBSEMVER_HEADER_FILES} DESTINATION include/libsemver)
 # tests
 include(CTest)
 
+set(SEMVER_EXECUTABLE ./semver)
+
 # semver 2.0.0 tests (see https://semver.org and https://regex101.com/r/vkijKf/1/)
 
 add_test(version0 semver -v 0.0.4)
@@ -145,8 +147,6 @@ add_test(version25 semver -v 1.2.3----RC-SNAPSHOT.12.9.1--.12+788)
 add_test(version26 semver -v 1.2.3----R-S.12.9.1--.12+meta)
 add_test(version27 semver -v 1.2.3----RC-SNAPSHOT.12.9.1--.12)
 add_test(version28 semver -v 1.0.0+0.build.1-rc.10000aaa-kk-0.1)
-# The following test is expected to fail since we're using an unsigned integer
-# to store the version components.
 add_test(version29 semver -v 99999999999999999999999.999999999999999999.99999999999999999)
 add_test(version30 semver -v 1.0.0-0A.is.legal)
 
@@ -257,8 +257,20 @@ set_tests_properties(semverBumpPatch PROPERTIES PASS_REGULAR_EXPRESSION "1\\.0\\
 add_test(semverBumpCoordinate semver -b 10 1.2.3)
 set_tests_properties(semverBumpCoordinate PROPERTIES PASS_REGULAR_EXPRESSION "1\\.2\\.3\\.0\\.0\\.0\\.0\\.0\\.0\\.0\\.1")
 
-add_test(semverCompare semver -c 1.2.3 7.8.9)
-set_tests_properties(semverCompare PROPERTIES WILL_FAIL true)
+# Testing comparison: including all tests from https://semver.org
+add_test(semverCompare ${CMAKE_SOURCE_DIR}/check_exit_code.sh 1 ${SEMVER_EXECUTABLE} -c 1.2.3 7.8.9)
+add_test(semverCompare2 ${CMAKE_SOURCE_DIR}/check_exit_code.sh 2 ${SEMVER_EXECUTABLE} -c 7.8.9 1.2.3)
+add_test(semverCompare3 ${CMAKE_SOURCE_DIR}/check_exit_code.sh 2 ${SEMVER_EXECUTABLE} -c 71.8.9 1.2.3)
+add_test(semverCompare4 ${CMAKE_SOURCE_DIR}/check_exit_code.sh 2 ${SEMVER_EXECUTABLE} -c 17.8.9 2.2.3)
+add_test(semverCompare5 ${CMAKE_SOURCE_DIR}/check_exit_code.sh 2 ${SEMVER_EXECUTABLE} -c 1.17.3 1.2.3)
+add_test(semverCompare6 ${CMAKE_SOURCE_DIR}/check_exit_code.sh 1 ${SEMVER_EXECUTABLE} -c 1.0.0-alpha 1.0.0)
+add_test(semverCompare7 ${CMAKE_SOURCE_DIR}/check_exit_code.sh 1 ${SEMVER_EXECUTABLE} -c 1.0.0-alpha 1.0.0-alpha.1)
+add_test(semverCompare8 ${CMAKE_SOURCE_DIR}/check_exit_code.sh 1 ${SEMVER_EXECUTABLE} -c 1.0.0-alpha.1 1.0.0-alpha.beta)
+add_test(semverCompare9 ${CMAKE_SOURCE_DIR}/check_exit_code.sh 1 ${SEMVER_EXECUTABLE} -c 1.0.0-alpha.beta 1.0.0-beta)
+add_test(semverCompare10 ${CMAKE_SOURCE_DIR}/check_exit_code.sh 1 ${SEMVER_EXECUTABLE} -c 1.0.0-beta 1.0.0-beta.2)
+add_test(semverCompare11 ${CMAKE_SOURCE_DIR}/check_exit_code.sh 1 ${SEMVER_EXECUTABLE} -c 1.0.0-beta.2 1.0.0-beta.11)
+add_test(semverCompare12 ${CMAKE_SOURCE_DIR}/check_exit_code.sh 1 ${SEMVER_EXECUTABLE} -c 1.0.0-beta.11 1.0.0-rc.1)
+add_test(semverCompare13 ${CMAKE_SOURCE_DIR}/check_exit_code.sh 1 ${SEMVER_EXECUTABLE} -c 1.0.0-rc.1 1.0.0)
 
 # installer
 include(InstallRequiredSystemLibraries)
