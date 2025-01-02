@@ -28,6 +28,7 @@
 #include "../gettext_defs.h"
 #include <exception>
 #include <cstdlib>
+#include <cstring>
 #include <memory>
 #include <stdexcept>
 
