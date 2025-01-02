@@ -27,9 +27,15 @@ Features
 
   * Version parsing and splitting into their components.
 
-  * Version comparison: <, == and > are supported.
+  * Unrestricted size of numeric version components (since 2.0.0).
+
+  * Version comparison: `<`, `==` and `>` are supported.
 
   * Version bump, per coordinate.
+
+  * Tests covering all the cases specified in the [Semantic Versioning 2.0.0 specification][semver].
+
+  * C++11 standard code, no external dependency required.
 
 `semver` is a program built on top of `libsemver` providing the following
 functionality:
@@ -186,7 +192,7 @@ Bug reports can be reported as issues on the [project home page][semver-utils].
 
 -----
 
-Copyright (c) 2016-2017 Enrico M. Crisostomo
+Copyright (c) 2016-2024 Enrico M. Crisostomo
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
