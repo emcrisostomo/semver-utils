@@ -117,48 +117,20 @@ namespace semver
 
   version version::from_string(std::string v)
   {
-    // SemVer 2.0.0
-    //
-    // 2. A normal version number MUST take the form X.Y.Z where X, Y, and Z are
-    //    non-negative integers, and MUST NOT contain leading zeroes. [...]
-    //
-    // This implementation allows for a version number containing more than 3
-    // components.
-    const std::string version_pattern = "((0|[1-9][[:digit:]]*)(\\.(0|[1-9][[:digit:]]*)){1,})";
-    const int VERSION_INDEX = 1;
+    const std::string version = std::move(v);
 
-    // 9. A pre-release version MAY be denoted by appending a hyphen and a series
-    //    of dot separated identifiers immediately following the patch version.
-    //    Identifiers MUST comprise only ASCII alphanumerics and hyphen
-    //    [0-9A-Za-z-].  Identifiers MUST NOT be empty.  Numeric identifiers MUST
-    //    NOT include leading zeroes.
-    const std::string prerelease_pattern = "(-" + PRERELEASE_PATTERN + ")?";
-    const int PRERELEASE_INDEX = 6;
-
-    // 10. Build metadata MAY be denoted by appending a plus sign and a series of
-    //     dot separated identifiers immediately following the patch or
-    //     pre-release version.  Identifiers MUST comprise only ASCII
-    //     alphanumerics and hyphen [0-9A-Za-z-].  Identifiers MUST NOT be
-    //     empty.
-    const std::string metadata_pattern = "(\\+" + METADATA_PATTERN + ")?";
-    const int METADATA_INDEX = 9;
-
-    const std::string grammar =
-      std::string("^")
-      + version_pattern
-      + prerelease_pattern
-      + metadata_pattern
-      + "$";
-
-    std::regex version_grammar(grammar, std::regex_constants::extended);
-    std::smatch fragments;
-
-    if (!std::regex_match(v, fragments, version_grammar))
+    const std::string semver_ecma = "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$";
+    std::regex semver_ecma_regexp(semver_ecma, std::regex_constants::ECMAScript);
+    std::smatch ecma_fragments;
+    if (!std::regex_match(v, ecma_fragments, semver_ecma_regexp))
       throw std::invalid_argument(_("Invalid version: ") + v);
 
-    return semver::version(parse_version(fragments[VERSION_INDEX].str()),
-                           fragments[PRERELEASE_INDEX].str(),
-                           fragments[METADATA_INDEX].str());
+    return semver::version(
+            static_cast<unsigned int>(std::stoul(ecma_fragments[1])),
+            static_cast<unsigned int>(std::stoul(ecma_fragments[2])),
+            static_cast<unsigned int>(std::stoul(ecma_fragments[3])),
+            ecma_fragments[4],
+            ecma_fragments[5]);
   }
 
   version::version(std::vector<unsigned int> versions,
