@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2017 Enrico M. Crisostomo
+ * Copyright (c) 2016-2024 Enrico M. Crisostomo
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -380,7 +380,7 @@ void print_version()
 {
   std::cout << PACKAGE_STRING << "\n";
   std::cout <<
-         "Copyright (C) 2016-2017 Enrico M. Crisostomo <enrico.m.crisostomo@gmail.com>.\n";
+         "Copyright (C) 2016-2024 Enrico M. Crisostomo <enrico.m.crisostomo@gmail.com>.\n";
   std::cout <<
          _("License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.\n");
   std::cout <<
