@@ -36,6 +36,6 @@
 #
 # Libtool documentation, 7.3 Updating library version information
 #
-m4_define([LIBSEMVER_VERSION], [1.2.0-develop])
+m4_define([LIBSEMVER_VERSION], [2.0.0])
 m4_define([LIBSEMVER_API_VERSION], [3:0:0])
 m4_define([LIBSEMVER_REVISION], [1])
