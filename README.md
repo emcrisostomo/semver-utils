@@ -1,4 +1,6 @@
 [![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg?style=flat)](https://github.com/emcrisostomo/semver-utils/blob/master/LICENSE)
+[![C/C++ CI with Autotools](https://github.com/emcrisostomo/semver-utils/actions/workflows/autotools.yml/badge.svg)](https://github.com/emcrisostomo/semver-utils/actions/workflows/autotools.yml)
+[![CMake](https://github.com/emcrisostomo/semver-utils/actions/workflows/cmake.yml/badge.svg)](https://github.com/emcrisostomo/semver-utils/actions/workflows/cmake.yml)
 
 README
 ======
